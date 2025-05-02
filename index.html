@@ -1,381 +1,412 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>LaserWood Design - Graviranje i Sečenje Drveta</title>
- <meta name="description" content="LaserWood Design - Profesionalno graviranje, sečenje i urezivanje drveta. Unikatni drveni proizvodi, personalizovani pokloni i prilagođeni dizajni.">
- <meta name="keywords" content="graviranje drveta, sečenje drveta, urezivanje drveta, LaserWood Design, drveni proizvodi, personalizovani pokloni, Milan Tošić">
- <meta name="author" content="Milan Tošić">
- <meta name="robots" content="index, follow">
- <meta property="og:title" content="LaserWood Design - Graviranje i Sečenje Drveta">
- <meta property="og:description" content="Izrađujemo unikatne drvene proizvode sa graviranjem i sečenjem po meri. Naručite svoj dizajn već danas!">
- <meta property="og:image" content="logo.png">
- <meta property="og:url" content="https://unlimitededition.github.io/laserwood-design/">
- <meta property="og:type" content="website">
- <meta property="og:site_name" content="LaserWood Design">
- <meta name="twitter:card" content="summary_large_image">
- <link rel="canonical" href="https://unlimitededition.github.io/laserwood-design/">
- <link rel="icon" type="image/png" href="favicon.png">
- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
- <!-- Google tag (gtag.js) -->
- <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMG3RE6V1X"></script>
- <script>
-   window.dataLayer = window.dataLayer || [];
-   function gtag(){dataLayer.push(arguments);}
-   gtag('js', new Date());
-   gtag('config', 'G-TMG3RE6V1X');
- </script>
- <style>
-     body {
-         font-family: 'Open Sans', Arial, sans-serif;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         min-height: 100vh;
-         margin: 0;
-         background-color: #F5F5F5;
-     }
-     .card {
-         background-color: white;
-         border-radius: 15px;
-         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-         width: 100%;
-         max-width: 450px;
-         text-align: center;
-         padding: 30px;
-         margin: 20px;
-         position: relative;
-         background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-         background-size: cover;
-         opacity: 0;
-         transform: translateY(20px);
-         animation: slideIn 0.8s ease-out forwards;
-     }
-     @keyframes slideIn {
-         to {
-             opacity: 1;
-             transform: translateY(0);
-         }
-     }
-     .card img.logo {
-         border-radius: 50%;
-         width: 120px;
-         height: 120px;
-         object-fit: cover;
-         margin-bottom: 20px;
-         border: 3px solid #8B5A2B;
-     }
-     .card h1 {
-         font-family: 'Montserrat', sans-serif;
-         font-size: 28px;
-         font-weight: 700;
-         margin: 10px 0;
-         color: #333;
-     }
-     .card h2 {
-         font-family: 'Montserrat', sans-serif;
-         font-size: 18px;
-         font-weight: 600;
-         color: #555;
-         margin: 5px 0;
-     }
-     .card p {
-         font-size: 15px;
-         color: #666;
-         margin: 12px 0;
-         line-height: 1.6;
-     }
-     .card a {
-         color: #8B5A2B;
-         text-decoration: none;
-         font-weight: 600;
-         transition: color 0.3s ease;
-     }
-     .card a:hover {
-         color: #D4A017;
-     }
-     .button {
-         display: inline-block;
-         background: linear-gradient(45deg, #8B5A2B, #A6743C);
-         color: white;
-         padding: 12px 25px;
-         border-radius: 25px;
-         text-decoration: none;
-         font-family: 'Montserrat', sans-serif;
-         font-weight: 600;
-         font-size: 15px;
-         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-         transition: all 0.3s ease;
-         margin-top: 20px;
-         border: none;
-         cursor: pointer;
-     }
-     .button:hover {
-         background: linear-gradient(45deg, #A6743C, #D4A017);
-         transform: translateY(-2px);
-         box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
-     }
-     .contact-icons {
-         display: inline-flex;
-         gap: 12px;
-         margin-left: 8px;
-     }
-     .contact-icons a {
-         color: #8B5A2B;
-         font-size: 22px;
-         transition: color 0.3s ease;
-     }
-     .contact-icons a:hover {
-         color: #D4A017;
-     }
-     .slideshow-container {
-         position: relative;
-         max-width: 100%;
-         margin: 20px auto;
-     }
-     .slideshow-container img, .slideshow-container svg {
-         width: 100%;
-         height: 300px;
-         object-fit: cover;
-         border-radius: 8px;
-         display: none;
-         opacity: 0;
-         transition: opacity 0.5s ease-in-out;
-     }
-     .slideshow-container img:first-child, .slideshow-container svg:first-child {
-         display: block;
-         opacity: 1;
-     }
-     .prev, .next {
-         cursor: pointer;
-         position: absolute;
-         top: 50%;
-         transform: translateY(-50%);
-         width: auto;
-         padding: 10px;
-         color: white;
-         font-weight: bold;
-         font-size: 20px;
-         background-color: rgba(0, 0, 0, 0.4);
-         border-radius: 50%;
-         user-select: none;
-     }
-     .next {
-         right: 5px;
-     }
-     .prev {
-         left: 5px;
-     }
-     .prev:hover, .next:hover {
-         background-color: rgba(0, 0, 0, 0.7);
-     }
-     .dots-container {
-         text-align: center;
-         margin-top: 15px;
-     }
-     .dot {
-         cursor: pointer;
-         height: 12px;
-         width: 12px;
-         margin: 0 5px;
-         background-color: #bbb;
-         border-radius: 50%;
-         display: inline-block;
-         transition: background-color 0.3s ease;
-     }
-     .dot.active, .dot:hover {
-         background-color: #8B5A2B;
-     }
-     .cookie-consent {
-         position: fixed;
-         bottom: 10px;
-         left: 10px;
-         right: 10px;
-         background-color: #333;
-         color: white;
-         padding: 15px;
-         border-radius: 5px;
-         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-         z-index: 1000;
-         display: none;
-         text-align: center;
-     }
-     .cookie-consent button {
-         background: linear-gradient(45deg, #8B5A2B, #A6743C);
-         color: white;
-         border: none;
-         padding: 8px 15px;
-         border-radius: 20px;
-         cursor: pointer;
-         margin-left: 10px;
-         font-family: 'Montserrat', sans-serif;
-     }
-     .cookie-consent button:hover {
-         background: linear-gradient(45deg, #A6743C, #D4A017);
-     }
-     @media (max-width: 600px) {
-         .card {
-             padding: 20px;
-             max-width: 90%;
-         }
-         .card h1 {
-             font-size: 24px;
-         }
-         .card h2 {
-             font-size: 16px;
-         }
-         .card p {
-             font-size: 14px;
-         }
-         .slideshow-container img, .slideshow-container svg {
-             height: 220px;
-         }
-         .prev, .next {
-             font-size: 16px;
-             padding: 8px;
-         }
-         .dot {
-             height: 10px;
-             width: 10px;
-         }
-         .button {
-             padding: 10px 20px;
-             font-size: 14px;
-         }
-         .cookie-consent {
-             font-size: 14px;
-             padding: 10px;
-         }
-     }
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaserWood Design - Graviranje i Sečenje Drveta</title>
+    <meta name="description" content="LaserWood Design - Profesionalno graviranje, sečenje i urezivanje drveta. Unikatni drveni ukrasi, personalizovani pokloni i prilagođeni dizajni.">
+    <meta name="keywords" content="graviranje drveta, sečenje drveta, urezivanje drveta, LaserWood Design, drveni proizvodi, personalizovani pokloni, Milan Tošić">
+    <meta name="author" content="Milan Tošić">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="LaserWood Design - Graviranje i Sečenje Drveta">
+    <meta property="og:description" content="Izrađujemo unikatne drvene proizvode sa graviranjem i sečenjem po meri. Naručite svoj dizajn već danas!">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:url" content="https://unlimitededition.github.io/laserwood-design/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="LaserWood Design">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://unlimitededition.github.io/laserwood-design/">
+    <link rel="alternate" hreflang="en" href="https://unlimitededition.github.io/laserwood-design/en">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMG3RE6V1X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TMG3RE6V1X');
+    </script>
+    <style>
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #F5F5F5;
+        }
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            padding: 30px;
+            margin: 20px;
+            position: relative;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            background-size: cover;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card img.logo {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid #8B5A2B;
+        }
+        .card h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 10px 0;
+            color: #333;
+        }
+        .card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #555;
+            margin: 5px 0;
+        }
+        .card p {
+            font-size: 15px;
+            color: #666;
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+        .card a {
+            color: #8B5A2B;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .card a:hover {
+            color: #D4A017;
+        }
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, #8B5A2B, #A6743C);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: linear-gradient(45deg, #A6743C, #D4A017);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        }
+        .contact-icons {
+            display: inline-flex;
+            gap: 12px;
+            margin-left: 8px;
+        }
+        .contact-icons a {
+            color: #8B5A2B;
+            font-size: 22px;
+            transition: color 0.3s ease;
+        }
+        .contact-icons a:hover {
+            color: #D4A017;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 30px 0 0 0;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 80vh;
+        }
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .close, .prev, .next {
+            position: absolute;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .close {
+            top: 10px;
+            right: 10px;
+        }
+        .prev, .next {
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        .close:hover, .prev:hover, .next:hover {
+            color: #D4A017;
+        }
+        .cookie-consent {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+        .cookie-consent button {
+            background: linear-gradient(45deg, #8B5A2B, #A6743C);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .cookie-consent button:hover {
+            background: linear-gradient(45deg, #A6743C, #D4A017);
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            .card {
+                padding: 20px;
+                max-width: 90%;
+            }
+            .card h1 {
+                font-size: 24px;
+            }
+            .card h2 {
+                font-size: 16px;
+            }
+            .card p {
+                font-size: 14px;
+            }
+            .gallery-grid img {
+                height: 80px;
+            }
+            .button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .cookie-consent {
+                font-size: 14px;
+                padding: 10px;
+            }
+            .modal-content {
+                max-width: 95%;
+            }
+        }
+    </style>
 </head>
 <body>
- <div class="cookie-consent" id="cookieConsent">
-     <p>Ovaj sajt koristi kolačiće za praćenje poseta (Google Analytics). Nastavkom korišćenja sajta, slažete se sa upotrebom kolačića.</p>
-     <button onclick="acceptCookies()">Prihvati</button>
- </div>
- <div class="card">
-     <img src="logo.jpg" alt="LaserWood Design - Graviranje Drveta" class="logo" loading="lazy">
-     <div class="slideshow-container">
-         <img src="logo.png" alt="Logo LaserWood Design" class="slide" loading="lazy">
-         <img src="IMG_001.JPG" alt="Proizvod 1" class="slide" loading="lazy">
-         <img src="IMG_002.JPG" alt="Proizvod 2" class="slide" loading="lazy">
-         <img src="IMG_003.JPG" alt="Proizvod 3" class="slide" loading="lazy">
-         <img src="IMG_004.JPG" alt="Proizvod 4" class="slide" loading="lazy">
-         <img src="IMG_005.JPG" alt="Proizvod 5" class="slide" loading="lazy">
-         <img src="IMG_006.JPG" alt="Proizvod 6" class="slide" loading="lazy">
-         <img src="IMG_007.JPG" alt="Proizvod 7" class="slide" loading="lazy">
-         <img src="IMG_008.JPG" alt="Proizvod 8" class="slide" loading="lazy">
-         <img src="IMG_009.JPG" alt="Proizvod 9" class="slide" loading="lazy">
-         <img src="IMG_010.JPG" alt="Proizvod 10" class="slide" loading="lazy">
-         <img src="IMG_011.JPG" alt="Proizvod 11" class="slide" loading="lazy">
-         <img src="IMG_012.JPG" alt="Proizvod 12" class="slide" loading="lazy">
-         <img src="IMG_013.JPG" alt="Proizvod 13" class="slide" loading="lazy">
-         <img src="IMG_014.JPG" alt="Proizvod 14" class="slide" loading="lazy">
-         <img src="IMG_015.JPG" alt="Proizvod 15" class="slide" loading="lazy">
-         <img src="IMG_016.JPG" alt="Proizvod 16" class="slide" loading="lazy">
-         <img src="IMG_017.JPG" alt="Proizvod 17" class="slide" loading="lazy">
-         <img src="IMG_018.JPG" alt="Proizvod 18" class="slide" loading="lazy">
-         <img src="IMG_019.JPG" alt="Proizvod 19" class="slide" loading="lazy">
-         <img src="IMG_020.JPG" alt="Proizvod 20" class="slide" loading="lazy">
-         <img src="IMG_021.JPG" alt="Proizvod 21" class="slide" loading="lazy">
-         <img src="IMG_022.JPG" alt="Proizvod 22" class="slide" loading="lazy">
-         <img src="IMG_023.JPG" alt="Proizvod 23" class="slide" loading="lazy">
-         <a class="prev" onclick="plusSlides(-1)">❮</a>
-         <a class="next" onclick="plusSlides(1)">❯</a>
-         <div class="dots-container">
-             <span class="dot" onclick="currentSlide(1)"></span>
-             <span class="dot" onclick="currentSlide(2)"></span>
-             <span class="dot" onclick="currentSlide(3)"></span>
-             <span class="dot" onclick="currentSlide(4)"></span>
-             <span class="dot" onclick="currentSlide(5)"></span>
-             <span class="dot" onclick="currentSlide(6)"></span>
-             <span class="dot" onclick="currentSlide(7)"></span>
-             <span class="dot" onclick="currentSlide(8)"></span>
-             <span class="dot" onclick="currentSlide(9)"></span>
-             <span class="dot" onclick="currentSlide(10)"></span>
-             <span class="dot" onclick="currentSlide(11)"></span>
-             <span class="dot" onclick="currentSlide(12)"></span>
-             <span class="dot" onclick="currentSlide(13)"></span>
-             <span class="dot" onclick="currentSlide(14)"></span>
-             <span class="dot" onclick="currentSlide(15)"></span>
-             <span class="dot" onclick="currentSlide(16)"></span>
-             <span class="dot" onclick="currentSlide(17)"></span>
-             <span class="dot" onclick="currentSlide(18)"></span>
-             <span class="dot" onclick="currentSlide(19)"></span>
-             <span class="dot" onclick="currentSlide(20)"></span>
-             <span class="dot" onclick="currentSlide(21)"></span>
-             <span class="dot" onclick="currentSlide(22)"></span>
-             <span class="dot" onclick="currentSlide(23)"></span>
-             <span class="dot" onclick="currentSlide(24)"></span>
-         </div>
-     </div>
-     <h1>LaserWood Design</h1>
-     <h2>Milan Tošić</h2>
-     <p>Profesionalno <strong>graviranje, sečenje i urezivanje drveta</strong>. Izrađujem unikatne drvene proizvode: ukrasne ploče, personalizovane poklone, natpise i prilagođene dizajne.</p>
-     <p><strong>Kontakt:</strong> <a href="mailto:laserwooooddesign@gmail.com">laserwooooddesign@gmail.com</a></p>
-     <p><strong>Telefon:</strong> <a href="tel:+381693349457">+381 69 334 94 57</a><span class="contact-icons"><a href="viber://chat?number=+381693349457"><i class="fab fa-viber"></i></a><a href="https://wa.me/+381693349457"><i class="fab fa-whatsapp"></i></a><a href="https://www.tiktok.com/@laserwooooddesign"><i class="fab fa-tiktok"></i></a></span></p>
-     <p>Naručite svoj jedinstveni drveni proizvod!</p>
-     <button onclick="showAlert()" class="button">Pogledaj šablon za narudžbine</button>
- </div>
- <script>
-     let slideIndex = 0;
-     showSlides();
+    <div class="cookie-consent" id="cookieConsent">
+        <p>Ovaj sajt koristi kolačiće za praćenje poseta (Google Analytics). <a href="./privacy-policy.html" style="color: #D4A017;">Politika privatnosti</a></p>
+        <button onclick="acceptCookies()">Prihvati</button>
+        <button onclick="declineCookies()">Odbij</button>
+    </div>
+    <div class="toast" id="toastNotification"></div>
+    <div class="card">
+        <img src="logo.jpg" alt="LaserWood Design logo sa drvenom teksturom" class="logo" loading="lazy">
+        <h1>LaserWood Design</h1>
+        <h2>Milan Tošić</h2>
+        <p>Skenirali ste naš QR kod? Dobro došli! Profesionalno <strong>graviranje, sečenje i urezivanje drveta</strong>. Izrađujem unikatne drvene proizvode: ukrasne ploče, personalizovane poklone, natpise i prilagođene dizajne.</p>
+        <p><strong>Kontakt:</strong> <a href="mailto:laserwooooddesign@gmail.com">laserwooooddesign@gmail.com</a></p>
+        <p><strong>Telefon:</strong> <a href="tel:+381693349457">+381 69 334 94 57</a><span class="contact-icons"><a href="viber://chat?number=+381693349457" aria-label="Kontaktirajte nas preko Viber-a"><i class="fab fa-viber"></i></a><a href="https://wa.me/+381693349457" aria-label="Kontaktirajte nas preko WhatsApp-a"><i class="fab fa-whatsapp"></i></a><a href="https://www.tiktok.com/@laserwooooddesign" aria-label="Pogledajte naš TikTok profil"><i class="fab fa-tiktok"></i></a></span></p>
+        <p>Naručite svoj jedinstveni drveni proizvod!</p>
+        <button onclick="showRedirectConfirm()" class="button">Pogledaj katalog proizvoda</button>
+        <div class="gallery-grid" id="galleryGrid">
+            <img src="logo.png" alt="Logo LaserWood Design" loading="lazy">
+            <img src="IMG_001.JPG" alt="Kutija koja izgleda kao Knjiga" loading="lazy">
+            <img src="IMG_002.JPG" alt="Kutija koja izgleda kao Knjiga" loading="lazy">
+            <img src="IMG_003.JPG" alt="Kutija koja izgleda kao Knjiga" loading="lazy">
+            <img src="IMG_004.JPG" alt="Kutija koja izgleda kao Knjiga" loading="lazy">
+            <img src="IMG_005.JPG" alt="Kutija koja izgleda kao Knjiga" loading="lazy">
+            <img src="IMG_006.JPG" alt="Kutija Srce sa poklopcem" loading="lazy">
+            <img src="IMG_007.JPG" alt="Kutija Srce sa poklopcem" loading="lazy">
+            <img src="IMG_008.JPG" alt="Kutija Srce sa poklopcem" loading="lazy">
+            <img src="IMG_009.JPG" alt="Kutija Srce sa poklopcem" loading="lazy">
+            <img src="IMG_010.JPG" alt="Kutija Srce sa poklopcem" loading="lazy">
+            <img src="IMG_011.JPG" alt="Kutija Srce sa poklopcem" loading="lazy">
+            <img src="IMG_012.JPG" alt="Drveni privezak sa logom" loading="lazy">
+            <img src="IMG_013.JPG" alt="Drvena ploča sa porodičnim imenom" loading="lazy">
+            <img src="IMG_014.JPG" alt="Drveni ukras za rođendan" loading="lazy">
+            <img src="IMG_015.JPG" alt="Jedan od radova" loading="lazy">
+            <img src="IMG_016.JPG" alt="Jedan od radova" loading="lazy">
+            <img src="IMG_017.JPG" alt="Jedan od radova" loading="lazy">
+            <img src="IMG_018.JPG" alt="Poklon kutija za poklone na slavljima" loading="lazy">
+            <img src="IMG_019.JPG" alt="Poklon kutija za poklone na slavljima" loading="lazy">
+            <img src="IMG_020.JPG" alt="Poklon kutija za poklone na slavljima" loading="lazy">
+            <img src="IMG_021.JPG" alt="Ploca koja se gravira za unutrasnji deo kutije" loading="lazy">
+            <img src="IMG_022.JPG" alt="Ploca koja se gravira za unutrasnji deo kutije" loading="lazy">
+            <img src="IMG_023.JPG" alt="Kutija koja izgleda kao Knjiga" loading="lazy">
+        </div>
+        <div id="galleryModal" class="modal" role="dialog" aria-label="Galerija slika">
+            <span class="close" onclick="closeModal()" tabindex="0" role="button" aria-label="Zatvori modal">×</span>
+            <span class="prev" onclick="plusSlides(-1)" tabindex="0" role="button" aria-label="Prethodna slika">❮</span>
+            <span class="next" onclick="plusSlides(1)" tabindex="0" role="button" aria-label="Sledeća slika">❯</span>
+            <div class="modal-content">
+                <img id="modalImage" alt="">
+                <div class="modal-caption" id="modalCaption"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const galleryImages = document.querySelectorAll('.gallery-grid img');
+        const slides = Array.from(galleryImages).map(img => ({
+            src: img.src,
+            alt: img.alt
+        }));
+        let currentSlideIndex = 0;
+        const modal = document.getElementById('galleryModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
 
-     function showSlides() {
-         let slides = document.getElementsByClassName("slide");
-         let dots = document.getElementsByClassName("dot");
-         for (let i = 0; i < slides.length; i++) {
-             slides[i].style.display = "none";
-             slides[i].style.opacity = "0";
-             dots[i].className = dots[i].className.replace(" active", "");
-         }
-         slideIndex++;
-         if (slideIndex > slides.length) {slideIndex = 1}
-         slides[slideIndex-1].style.display = "block";
-         slides[slideIndex-1].style.opacity = "1";
-         dots[slideIndex-1].className += " active";
-         setTimeout(showSlides, 5000);
-     }
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentSlideIndex = index;
+                openModal();
+            });
+            img.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    currentSlideIndex = index;
+                    openModal();
+                }
+            });
+        });
 
-     function plusSlides(n) {
-         slideIndex += n - 1;
-         let slides = document.getElementsByClassName("slide");
-         let dots = document.getElementsByClassName("dot");
-         if (slideIndex > slides.length) {slideIndex = 1}
-         if (slideIndex < 1) {slideIndex = slides.length}
-         for (let i = 0; i < slides.length; i++) {
-             slides[i].style.display = "none";
-             slides[i].style.opacity = "0";
-             dots[i].className = dots[i].className.replace(" active", "");
-         }
-         slides[slideIndex-1].style.display = "block";
-         slides[slideIndex-1].style.opacity = "1";
-         dots[slideIndex-1].className += " active";
-     }
+        function openModal() {
+            modal.style.display = 'flex';
+            modalImage.src = slides[currentSlideIndex].src;
+            modalImage.alt = slides[currentSlideIndex].alt;
+            modalCaption.textContent = slides[currentSlideIndex].alt;
+        }
 
-     function currentSlide(n) {
-         slideIndex = n - 1;
-         plusSlides(1);
-     }
+        function closeModal() {
+            modal.style.display = 'none';
+        }
 
-     function showAlert() {
-         alert("Proizvodi koje ćete videti su informativnog karaktera, pošaljite screenshot proizvoda za detalje.");
-         window.location.href = "https://boxes.hackerspace-bamberg.de/?language=en";
-     }
+        function plusSlides(n) {
+            currentSlideIndex += n;
+            if (currentSlideIndex >= slides.length) { currentSlideIndex = 0; }
+            if (currentSlideIndex < 0) { currentSlideIndex = slides.length - 1; }
+            modalImage.src = slides[currentSlideIndex].src;
+            modalImage.alt = slides[currentSlideIndex].alt;
+            modalCaption.textContent = slides[currentSlideIndex].alt;
+        }
 
-     function acceptCookies() {
-         document.getElementById('cookieConsent').style.display = 'none';
-         localStorage.setItem('cookiesAccepted', 'true');
-     }
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
 
-     window.onload = function() {
-         if (!localStorage.getItem('cookiesAccepted')) {
-             document.getElementById('cookieConsent').style.display = 'block';
-         }
-     };
- </script>
+        document.querySelector('.close').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') closeModal();
+        });
+        document.querySelector('.prev').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') plusSlides(-1);
+        });
+        document.querySelector('.next').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') plusSlides(1);
+        });
+
+        function showRedirectConfirm() {
+            const userConfirmed = confirm('Napuštate ovaj sajt i prelazite na nezavisni sajt sa katalogom proizvoda. Molimo vas da napravite screenshot odabranog proizvoda i pošaljete nam ga za dalje instrukcije. Da li želite da nastavite?');
+            if (userConfirmed) {
+                window.location.href = 'https://boxes.hackerspace-bamberg.de/?language=en';
+            }
+        }
+
+        function acceptCookies() {
+            document.getElementById('cookieConsent').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        function declineCookies() {
+            document.getElementById('cookieConsent').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'false');
+        }
+
+        window.onload = function() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById('cookieConsent').style.display = 'block';
+            }
+        };
+    </script>
 </body>
 </html>
