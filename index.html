@@ -10,12 +10,23 @@
  <meta name="robots" content="index, follow">
  <meta property="og:title" content="LaserWood Design - Graviranje i Sečenje Drveta">
  <meta property="og:description" content="Izrađujemo unikatne drvene proizvode sa graviranjem i sečenjem po meri. Naručite svoj dizajn već danas!">
- <meta property="og:image" content="logo.jpg">
- <meta property="og:url" content="https://UnlimitedEdition.github.io/laserwood-design">
+ <meta property="og:image" content="logo.png">
+ <meta property="og:url" content="https://tvoj-username.github.io/laserwood-design">
  <meta property="og:type" content="website">
- <link rel="canonical" href="https://github.com/UnlimitedEdition/laserwood-design.git">
+ <meta property="og:site_name" content="LaserWood Design">
+ <meta name="twitter:card" content="summary_large_image">
+ <link rel="canonical" href="https://tvoj-username.github.io/laserwood-design">
+ <link rel="icon" type="image/png" href="favicon.png">
  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ <!-- Google tag (gtag.js) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMG3RE6V1X"></script>
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', 'G-TMG3RE6V1X');
+ </script>
  <style>
      body {
          font-family: 'Open Sans', Arial, sans-serif;
@@ -177,6 +188,33 @@
      .dot.active, .dot:hover {
          background-color: #8B5A2B;
      }
+     .cookie-consent {
+         position: fixed;
+         bottom: 10px;
+         left: 10px;
+         right: 10px;
+         background-color: #333;
+         color: white;
+         padding: 15px;
+         border-radius: 5px;
+         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+         z-index: 1000;
+         display: none;
+         text-align: center;
+     }
+     .cookie-consent button {
+         background: linear-gradient(45deg, #8B5A2B, #A6743C);
+         color: white;
+         border: none;
+         padding: 8px 15px;
+         border-radius: 20px;
+         cursor: pointer;
+         margin-left: 10px;
+         font-family: 'Montserrat', sans-serif;
+     }
+     .cookie-consent button:hover {
+         background: linear-gradient(45deg, #A6743C, #D4A017);
+     }
      @media (max-width: 600px) {
          .card {
              padding: 20px;
@@ -206,37 +244,45 @@
              padding: 10px 20px;
              font-size: 14px;
          }
+         .cookie-consent {
+             font-size: 14px;
+             padding: 10px;
+         }
      }
  </style>
 </head>
 <body>
+ <div class="cookie-consent" id="cookieConsent">
+     <p>Ovaj sajt koristi kolačiće za praćenje poseta (Google Analytics). Nastavkom korišćenja sajta, slažete se sa upotrebom kolačića.</p>
+     <button onclick="acceptCookies()">Prihvati</button>
+ </div>
  <div class="card">
-     <img src="logo.jpg" alt="LaserWood Design - Graviranje Drveta" class="logo">
+     <img src="logo.jpg" alt="LaserWood Design - Graviranje Drveta" class="logo" loading="lazy">
      <div class="slideshow-container">
-         <img src="logo.png" alt="Laserski zrak" class="slide">
-         <img src="IMG_001.JPG" alt="Proizvod 1" class="slide">
-         <img src="IMG_002.JPG" alt="Proizvod 2" class="slide">
-         <img src="IMG_003.JPG" alt="Proizvod 3" class="slide">
-         <img src="IMG_004.JPG" alt="Proizvod 4" class="slide">
-         <img src="IMG_005.JPG" alt="Proizvod 5" class="slide">
-         <img src="IMG_006.JPG" alt="Proizvod 6" class="slide">
-         <img src="IMG_007.JPG" alt="Proizvod 7" class="slide">
-         <img src="IMG_008.JPG" alt="Proizvod 8" class="slide">
-         <img src="IMG_009.JPG" alt="Proizvod 9" class="slide">
-         <img src="IMG_010.JPG" alt="Proizvod 10" class="slide">
-         <img src="IMG_011.JPG" alt="Proizvod 11" class="slide">
-         <img src="IMG_012.JPG" alt="Proizvod 12" class="slide">
-         <img src="IMG_013.JPG" alt="Proizvod 13" class="slide">
-         <img src="IMG_014.JPG" alt="Proizvod 14" class="slide">
-         <img src="IMG_015.JPG" alt="Proizvod 15" class="slide">
-         <img src="IMG_016.JPG" alt="Proizvod 16" class="slide">
-         <img src="IMG_017.JPG" alt="Proizvod 17" class="slide">
-         <img src="IMG_018.JPG" alt="Proizvod 18" class="slide">
-         <img src="IMG_019.JPG" alt="Proizvod 19" class="slide">
-         <img src="IMG_020.JPG" alt="Proizvod 20" class="slide">
-         <img src="IMG_021.JPG" alt="Proizvod 21" class="slide">
-         <img src="IMG_022.JPG" alt="Proizvod 22" class="slide">
-         <img src="IMG_023.JPG" alt="Proizvod 23" class="slide">
+         <img src="logo.png" alt="Logo LaserWood Design" class="slide" loading="lazy">
+         <img src="IMG_001.JPG" alt="Proizvod 1" class="slide" loading="lazy">
+         <img src="IMG_002.JPG" alt="Proizvod 2" class="slide" loading="lazy">
+         <img src="IMG_003.JPG" alt="Proizvod 3" class="slide" loading="lazy">
+         <img src="IMG_004.JPG" alt="Proizvod 4" class="slide" loading="lazy">
+         <img src="IMG_005.JPG" alt="Proizvod 5" class="slide" loading="lazy">
+         <img src="IMG_006.JPG" alt="Proizvod 6" class="slide" loading="lazy">
+         <img src="IMG_007.JPG" alt="Proizvod 7" class="slide" loading="lazy">
+         <img src="IMG_008.JPG" alt="Proizvod 8" class="slide" loading="lazy">
+         <img src="IMG_009.JPG" alt="Proizvod 9" class="slide" loading="lazy">
+         <img src="IMG_010.JPG" alt="Proizvod 10" class="slide" loading="lazy">
+         <img src="IMG_011.JPG" alt="Proizvod 11" class="slide" loading="lazy">
+         <img src="IMG_012.JPG" alt="Proizvod 12" class="slide" loading="lazy">
+         <img src="IMG_013.JPG" alt="Proizvod 13" class="slide" loading="lazy">
+         <img src="IMG_014.JPG" alt="Proizvod 14" class="slide" loading="lazy">
+         <img src="IMG_015.JPG" alt="Proizvod 15" class="slide" loading="lazy">
+         <img src="IMG_016.JPG" alt="Proizvod 16" class="slide" loading="lazy">
+         <img src="IMG_017.JPG" alt="Proizvod 17" class="slide" loading="lazy">
+         <img src="IMG_018.JPG" alt="Proizvod 18" class="slide" loading="lazy">
+         <img src="IMG_019.JPG" alt="Proizvod 19" class="slide" loading="lazy">
+         <img src="IMG_020.JPG" alt="Proizvod 20" class="slide" loading="lazy">
+         <img src="IMG_021.JPG" alt="Proizvod 21" class="slide" loading="lazy">
+         <img src="IMG_022.JPG" alt="Proizvod 22" class="slide" loading="lazy">
+         <img src="IMG_023.JPG" alt="Proizvod 23" class="slide" loading="lazy">
          <a class="prev" onclick="plusSlides(-1)">❮</a>
          <a class="next" onclick="plusSlides(1)">❯</a>
          <div class="dots-container">
@@ -319,6 +365,17 @@
          alert("Proizvodi koje ćete videti su informativnog karaktera, pošaljite screenshot proizvoda za detalje.");
          window.location.href = "https://boxes.hackerspace-bamberg.de/?language=en";
      }
+
+     function acceptCookies() {
+         document.getElementById('cookieConsent').style.display = 'none';
+         localStorage.setItem('cookiesAccepted', 'true');
+     }
+
+     window.onload = function() {
+         if (!localStorage.getItem('cookiesAccepted')) {
+             document.getElementById('cookieConsent').style.display = 'block';
+         }
+     };
  </script>
 </body>
 </html>
