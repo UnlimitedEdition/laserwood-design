@@ -23,7 +23,9 @@ const slides = [
        slides.forEach((slide, index) => {
            const img = document.createElement('img');
            img.src = slide;
-           img.alt = 'Drveni proizvod';
+           // Generiši alt tekst iz naziva fajla (ukloni ekstenziju i zameni _ sa razmakom)
+           const altText = slide.replace(/\.[^/.]+$/, "").replace(/_/g, " ");
+           img.alt = altText;
            img.loading = 'lazy';
            img.onerror = () => console.error('Greška pri učitavanju slike:', slide);
            img.onload = () => console.log('Slika učitana:', slide);
@@ -35,7 +37,9 @@ const slides = [
    function openModal(index) {
        currentIndex = index;
        modalImage.src = slides[index];
-       modalImage.alt = 'Drveni proizvod';
+       // Ažuriraj alt tekst za modal sliku
+       const altText = slides[index].replace(/\.[^/.]+$/, "").replace(/_/g, " ");
+       modalImage.alt = altText;
        modal.style.display = 'flex';
        modalImage.focus();
        console.log('Modal otvoren, slika:', slides[index]);
@@ -49,7 +53,9 @@ const slides = [
    function changeImage(direction) {
        currentIndex = (currentIndex + direction + slides.length) % slides.length;
        modalImage.src = slides[currentIndex];
-       modalImage.alt = 'Drveni proizvod';
+       // Ažuriraj alt tekst za modal sliku
+       const altText = slides[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ");
+       modalImage.alt = altText;
        console.log('Promena slike, nova slika:', slides[currentIndex]);
    }
    
@@ -70,4 +76,3 @@ const slides = [
            if (e.key === 'Escape') closeModal();
        }
    });
-   
