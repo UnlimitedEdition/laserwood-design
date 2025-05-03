@@ -42,6 +42,19 @@ main {
  padding: 20px;
  text-align: center;
 }
+.welcome-section {
+ margin-bottom: 40px;
+}
+.welcome-section h3 {
+ font-size: 1.8em;
+ margin-bottom: 10px;
+ color: #333;
+}
+.welcome-section p {
+ font-size: 1.1em;
+ color: #555;
+ line-height: 1.6;
+}
 h3 {
  font-size: 1.8em;
  margin-bottom: 20px;
@@ -167,6 +180,18 @@ footer a:hover {
 .catalog-button:hover {
  background-color: #0056b3;
 }
+.catalog-note {
+ font-size: 1em;
+ color: #555;
+ margin-top: 10px;
+}
+.catalog-note a {
+ color: #007bff;
+ text-decoration: none;
+}
+.catalog-note a:hover {
+ text-decoration: underline;
+}
 .tiktok-section {
  margin-top: 40px;
  text-align: center;
@@ -193,6 +218,12 @@ footer a:hover {
  }
  header h3 {
      font-size: 1.2em;
+ }
+ .welcome-section h3 {
+     font-size: 1.5em;
+ }
+ .welcome-section p {
+     font-size: 1em;
  }
  .gallery {
      grid-template-columns: 1fr;
