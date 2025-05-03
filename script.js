@@ -10,36 +10,50 @@ const modal = document.getElementById('modal');
 const modalImage = document.getElementById('modalImage');
 const gallery = document.getElementById('gallery');
 const catalogModal = document.getElementById('catalogModal');
+// Dijagnostika za galeriju
+console.log('Proveravam galeriju...');
+console.log('Modal:', modal);
+console.log('Gallery element:', gallery);
+if (!gallery) {
+    console.error('Galerija nije pronađena! Proverite ID "gallery" u HTML-u.');
+} else {
+    slides.forEach((slide, index) => {
+        const img = document.createElement('img');
+        img.src = slide;
+        img.alt = Drveni proizvod ;
+        img.loading = 'lazy';
+        img.onerror = () => console.error(Greška pri učitavanju slike: );
+        img.onload = () => console.log(Slika učitana: );
+        img.onclick = () => openModal(index);
+        gallery.appendChild(img);
+    });
+}
 function openModal(index) {
     currentIndex = index;
     modalImage.src = slides[index];
     modalImage.alt = Drveni proizvod ;
     modal.style.display = 'flex';
     modalImage.focus();
+    console.log('Modal otvoren, slika:', slides[index]);
 }
 function closeModal() {
     modal.style.display = 'none';
+    console.log('Modal zatvoren.');
 }
 function changeImage(direction) {
     currentIndex = (currentIndex + direction + slides.length) % slides.length;
     modalImage.src = slides[currentIndex];
     modalImage.alt = Drveni proizvod ;
+    console.log('Promena slike, nova slika:', slides[currentIndex]);
 }
 function openCatalogModal() {
     catalogModal.style.display = 'flex';
+    console.log('Katalog modal otvoren.');
 }
 function closeCatalogModal() {
     catalogModal.style.display = 'none';
+    console.log('Katalog modal zatvoren.');
 }
-slides.forEach((slide, index) => {
-    const img = document.createElement('img');
-    img.src = slide;
-    img.alt = Drveni proizvod ;
-    img.loading = 'lazy';
-    img.onerror = () => console.error(Greška pri učitavanju slike: );
-    img.onclick = () => openModal(index);
-    gallery.appendChild(img);
-});
 document.addEventListener('keydown', (e) => {
     if (modal.style.display === 'flex') {
         if (e.key === 'ArrowLeft') changeImage(-1);
@@ -51,58 +65,11 @@ document.addEventListener('keydown', (e) => {
 function acceptCookies() {
     document.getElementById('cookieConsent').style.display = 'none';
     localStorage.setItem('cookiesAccepted', 'true');
-}
-function calculatePrice() {
-    const lengthInput = document.getElementById('lengthInput');
-    const widthInput = document.getElementById('widthInput');
-    const textInput = document.getElementById('engraveText');
-    const priceResult = document.getElementById('priceResult');
-
-const length = parseFloat(lengthInput.value);
-const width = parseFloat(widthInput.value);
-const text = textInput.value || '';
-
-if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
-    priceResult.innerHTML = 'Molimo unesite validne dimenzije (veće od 0).';
-    priceResult.style.color = 'red';
-    return;
-}
-
-// Ako je proizvod manji od 400x400 mm, i dalje koristimo celu ploču zbog otpada
-const materialCost = 75; // Cela ploča 400x400 mm
-
-// Procena gravirane površine (1 cm² po karakteru, max 30 karaktera)
-const engravedArea = Math.min(text.length, 30) * 1;
-const engravingCost = engravedArea * 1; // 1 din/cm² za graviranje
-
-// Vreme rada lasera (0,5 min/cm² graviranja)
-const engravingTime = engravedArea * 0.5;
-const laserCost = engravingTime * 0.5; // 0,5 din/min
-
-// Struja (1 din/sat, odnosno 0,0167 din/min)
-const electricityCost = engravingTime * 0.0167;
-
-// Održavanje mašine
-const maintenanceCost = 50;
-
-// Poštarina
-const shippingCost = 40;
-
-// Ukupni troškovi pre marže
-const totalCost = materialCost + engravingCost + laserCost + electricityCost + maintenanceCost + shippingCost;
-
-// Marža od 600% (povećana da cena bude bliža 1000–1500 din)
-const totalWithMargin = totalCost * 6;
-
-// Raspon ±10%
-const lowerBound = Math.round(totalWithMargin * 0.9);
-const upperBound = Math.round(totalWithMargin * 1.1);
-
-priceResult.innerHTML = Procenjena cena:  -  dinara;
-priceResult.style.color = '#2c3e50';
+    console.log('Kolačići prihvaćeni.');
 }
 if (!localStorage.getItem('cookiesAccepted')) {
     document.getElementById('cookieConsent').style.display = 'block';
+    console.log('Prikazan cookie consent.');
 }
 // Provera konzole za greške
-console.log('Skripta je učitana. Proverite da li su sve slike prisutne i da kalkulator radi.');
+console.log('Skripta je učitana. Proverite da li su sve slike prisutne.');
