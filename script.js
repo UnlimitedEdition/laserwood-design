@@ -43,7 +43,7 @@ function closeModal() {
 function changeImage(direction) {
     currentIndex = (currentIndex + direction + slides.length) % slides.length;
     modalImage.src = slides[currentIndex];
-    modalImage.alt = Drveni proizvod ;
+    modalImage.alt = Drveni proizvod ; // Ispravljeno: koristi currentIndex
     console.log('Promena slike, nova slika:', slides[currentIndex]);
 }
 function openCatalogModal() {
