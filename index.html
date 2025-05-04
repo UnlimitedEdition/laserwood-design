@@ -31,29 +31,61 @@
  <link rel="icon" href="logo.jpg" type="image/jpeg"> <!-- OVO JE DODATO -->
  <title>LaserWood Design - Graviranje i Sečenje Drveta</title>
  <!-- Google Analytics -->
- <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMG3RE6V1X"></script>
- <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TMG3RE6V1X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
 
-     // Set default consent to 'denied' as a placeholder
-     // Determine actual values based on your own requirements
-     gtag('consent', 'default', {
-       'ad_storage': 'denied',
-       'ad_user_data': 'denied',
-       'ad_personalization': 'denied',
-       'analytics_storage': 'denied'
-     });
+  // Default: no consent
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
 
-     gtag('js', new Date());
-     gtag('config', 'G-TMG3RE6V1X');
- </script>
-</head>
-<body>
- <div class="cookie-consent" id="cookieConsent">
-     <p>Ovaj sajt koristi kolačiće kako bismo poboljšali vaše iskustvo. Prihvatanjem, slažete se sa našom <a href="./privacy-policy.html">Politikom privatnosti</a>.</p>
-     <button onclick="acceptCookies()">Prihvati</button>
- </div>
+  gtag('js', new Date());
+  gtag('config', 'G-TMG3RE6V1X');
+</script>
+
+<!-- Cookie Consent UI -->
+<div class="cookie-consent" id="cookieConsent" style="position: fixed; bottom: 20px; left: 20px; background: #fff; border: 1px solid #ccc; padding: 15px; z-index: 9999;">
+  <p>Ovaj sajt koristi kolačiće kako bismo poboljšali vaše iskustvo. Prihvatanjem, slažete se sa našom <a href="./privacy-policy.html">Politikom privatnosti</a>.</p>
+  <button onclick="acceptCookies()">Prihvati</button>
+  <button onclick="rejectCookies()">Odbij</button>
+</div>
+
+<script>
+function acceptCookies() {
+  gtag('consent', 'update', {
+    'ad_storage': 'granted',
+    'ad_user_data': 'granted',
+    'ad_personalization': 'granted',
+    'analytics_storage': 'granted'
+  });
+  document.getElementById('cookieConsent').style.display = 'none';
+  localStorage.setItem('cookieConsent', 'accepted');
+}
+
+function rejectCookies() {
+  gtag('consent', 'update', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
+  document.getElementById('cookieConsent').style.display = 'none';
+  localStorage.setItem('cookieConsent', 'rejected');
+}
+
+// Auto-hide if consent already stored
+window.addEventListener('DOMContentLoaded', () => {
+  const consent = localStorage.getItem('cookieConsent');
+  if (consent === 'accepted') acceptCookies();
+  if (consent === 'rejected') rejectCookies();
+});
+</script>
+
 
  <header>
      <img src="logo.jpg" alt="LaserWood Design Logo" class="logo" loading="lazy">
@@ -72,10 +104,14 @@
      <div class="gallery" id="gallery">
          <!-- Galerija se popunjava JavaScript-om -->
      </div>
+     <a href="javascript:void(0)" class="catalog-button" onclick="openCatalogModal()">📘 Pogledaj katalog proizvoda</a>
 
-     <a href="javascript:void(0)" class="catalog-button" onclick="openCatalogModal()">Pogledaj katalog proizvoda</a>
-     <p class="catalog-note">Posetite <a href="https://boxes.hackerspace-bamberg.de/?language=en" target="_blank">ovaj link</a> za šablone. Napravite screenshot-ove šablona i pošaljite ih nama kako bismo naručili model koji želite da napravimo.</p>
-
+     <p class="catalog-note">
+         Želite da brzo naručite proizvod po meri?  
+         Posetite <a href="https://boxes.hackerspace-bamberg.de/?language=en" target="_blank">ovaj generator šablona</a> kako biste videli moguće modele koje izrađujemo.  
+         Napravite snimak ekrana željenog šablona i pošaljite nam — mi ćemo preuzeti sve ostalo!
+     </p>
+     
      <div class="tiktok-section">
          <h3>Pratite nas na TikTok-u</h3>
          <iframe src='https://widgets.sociablekit.com/tiktok-feed/iframe/25553160' frameborder='0' width='100%' height='1000' loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

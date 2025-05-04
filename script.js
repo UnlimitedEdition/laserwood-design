@@ -3,7 +3,13 @@ const slides = [
     'IMG_006.jpg', 'IMG_007.jpg', 'IMG_008.jpg', 'IMG_009.jpg', 'IMG_010.jpg',
     'IMG_011.jpg', 'IMG_012.jpg', 'IMG_013.jpg', 'IMG_014.jpg', 'IMG_015.jpg',
     'IMG_016.jpg', 'IMG_017.jpg', 'IMG_018.jpg', 'IMG_019.jpg', 'IMG_020.jpg',
-    'IMG_021.jpg', 'IMG_022.jpg', 'IMG_023.jpg', 'logo_1.jpg'
+    'IMG_021.jpg', 'IMG_022.jpg', 'IMG_023.jpg', 'logo_1.jpg' , 'IMG-20250504-WA0000.jpg',
+    'IMG-20250504-WA0001.jpg', 'IMG-20250504-WA0002.jpg', 'IMG-20250504-WA0003.jpg',
+    'IMG-20250504-WA0004.jpg', 'IMG-20250504-WA0005.jpg', 'IMG-20250504-WA0006.jpg',
+    'IMG-20250504-WA0007.jpg', 'IMG-20250504-WA0008.jpg', 'IMG-20250504-WA0009.jpg',
+    'IMG-20250504-WA0010.jpg', 'IMG-20250504-WA0011.jpg', 'IMG-20250504-WA0012.jpg',
+    'IMG-20250504-WA0013.jpg', 'IMG-WA0002.jpg', 'IMG-WA0000.jpg',
+    'IMG-WA0011.jpg', 
    ];
    
    let currentIndex = 0;
