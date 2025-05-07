@@ -21,18 +21,10 @@ let currentIndex = 0;
 const modal = document.getElementById('modal');
 const modalImage = document.getElementById('modalImage');
 const gallery = document.getElementById('gallery');
-const catalogModal = document.getElementById('catalogModal');
 
-// Diagnostics
-console.log('Checking gallery...');
-console.log('Modal:', modal);
-console.log('Gallery element:', gallery);
-
-if (!gallery) {
-  console.error('Gallery not found! Check the "gallery" ID in HTML.');
-} else if (!modal || !modalImage || !catalogModal) {
-  console.error('Modal elements missing! Check IDs: modal, modalImage, catalogModal.');
-} else {
+// Load gallery images (only runs in gallery.html where id="gallery" exists)
+if (gallery) {
+  console.log('Initializing gallery...');
   slides.forEach((slide, index) => {
     const img = document.createElement('img');
     img.src = slide;
@@ -44,42 +36,50 @@ if (!gallery) {
     img.onclick = () => openModal(index);
     gallery.appendChild(img);
   });
+} else {
+  console.log('No gallery element found. Skipping gallery initialization.');
 }
 
+// Gallery modal functions (only used in gallery.html)
 function openModal(index) {
-  currentIndex = index;
-  modalImage.src = slides[index];
-  const altText = slides[index].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
-  modalImage.alt = altText;
-  modal.style.display = 'flex';
-  modalImage.focus();
-  console.log('Modal opened, image:', slides[index]);
+  if (modal && modalImage) {
+    currentIndex = index;
+    modalImage.src = slides[index];
+    const altText = slides[index].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
+    modalImage.alt = altText;
+    modal.style.display = 'flex';
+    modalImage.focus();
+    console.log('Modal opened, image:', slides[index]);
+  }
 }
 
 function closeModal() {
-  modal.style.display = 'none';
-  console.log('Modal closed.');
+  if (modal) {
+    modal.style.display = 'none';
+    console.log('Modal closed.');
+  }
 }
 
 function changeImage(direction) {
-  currentIndex = (currentIndex + direction + slides.length) % slides.length;
-  modalImage.src = slides[currentIndex];
-  const altText = slides[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
-  modalImage.alt = altText;
-  console.log('Image changed, new image:', slides[currentIndex]);
+  if (modal && modalImage) {
+    currentIndex = (currentIndex + direction + slides.length) % slides.length;
+    modalImage.src = slides[currentIndex];
+    const altText = slides[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
+    modalImage.alt = altText;
+    console.log('Image changed, new image:', slides[currentIndex]);
+  }
 }
 
-function openCatalogModal() {
-  catalogModal.style.display = 'flex';
-  console.log('Catalog modal opened.');
-}
+// Keyboard navigation for modal (only active when modal is open)
+document.addEventListener('keydown', (e) => {
+  if (modal && modal.style.display === 'flex') {
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'Escape') closeModal();
+  }
+});
 
-function closeCatalogModal() {
-  catalogModal.style.display = 'none';
-  console.log('Catalog modal closed.');
-}
-
-// Refresh TikTok iframe on page load
+// Refresh TikTok iframe on page load (only runs in index.html where id="tiktok-feed" exists)
 window.addEventListener('load', () => {
   const tiktokIframe = document.getElementById('tiktok-feed');
   if (tiktokIframe) {
@@ -87,13 +87,5 @@ window.addEventListener('load', () => {
     const randomParam = 't=' + new Date().getTime();
     tiktokIframe.src = baseSrc + '?' + randomParam;
     console.log('TikTok iframe refreshed:', tiktokIframe.src);
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (modal.style.display === 'flex') {
-    if (e.key === 'ArrowLeft') changeImage(-1);
-    if (e.key === 'ArrowRight') changeImage(1);
-    if (e.key === 'Escape') closeModal();
   }
 });

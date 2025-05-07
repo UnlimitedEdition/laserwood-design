@@ -89,6 +89,9 @@
     <h1>LaserWood Design</h1>
     <h2>Milan Tošić</h2>
     <h3>(+381) 069 334 94 57</h3>
+    <nav>
+      <a href="gallery.html">Galerija</a>
+    </nav>
   </header>
 
   <main>
@@ -97,11 +100,10 @@
       <p>Ovde možete pronaći sve informacije o našim uslugama graviranja, sečenja i urezivanja drveta. Izrađujemo unikatne drvene proizvode i personalizovane poklone po vašoj meri.</p>
     </section>
 
-    <h3>Naši radovi</h3>
-    <div class="gallery" id="gallery">
-      <!-- Galerija se popunjava JavaScript-om -->
-    </div>
-    <a href="javascript:void(0)" class="catalog-button" onclick="openCatalogModal()">📘 Pogledaj katalog proizvoda</a>
+    <section class="gallery-link">
+      <h3>Pogledajte Naše Radove</h3>
+      <p>Posetite našu <a href="gallery.html">galeriju</a> da vidite unikatne drvene proizvode i personalizovane dizajne.</p>
+    </section>
 
     <p class="catalog-note">
       Želite da brzo naručite proizvod po meri?  
@@ -114,22 +116,6 @@
       <iframe id="tiktok-feed" src="https://widgets.sociablekit.com/tiktok-feed/iframe/25553416" frameborder="0" width="100%" height="1000" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </main>
-
-  <div id="modal" class="modal">
-    <span class="close" onclick="closeModal()" tabindex="0" aria-label="Zatvori modal">×</span>
-    <img class="modal-content" id="modalImage" alt="Prikaz proizvoda">
-    <div class="prev" onclick="changeImage(-1)" tabindex="0" aria-label="Prethodna slika">❮</div>
-    <div class="next" onclick="changeImage(1)" tabindex="0" aria-label="Sledeća slika">❯</div>
-  </div>
-
-  <div id="catalogModal" class="modal">
-    <div class="modal-content" style="background: white; padding: 20px; text-align: center; border-radius: 8px;">
-      <span class="close" onclick="closeCatalogModal()" tabindex="0" aria-label="Zatvori modal">×</span>
-      <h3>Posetite naš katalog</h3>
-      <p>Želite da vidite više naših proizvoda? Pogledajte naš katalog na eksternom sajtu.</p>
-      <a href="https://boxes.hackerspace-bamberg.de/" target="_blank" class="catalog-button">Otvori katalog</a>
-    </div>
-  </div>
 
   <section class="documents">
     <h2>Preuzmite naše dokumente</h2>
