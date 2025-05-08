@@ -41,10 +41,15 @@ h1, h2, h3 {
 /* Modal za eksterni link */
 #external-link-modal {
   transition: opacity 0.3s ease;
+  z-index: 1000 !important;
 }
 
 #external-link-modal.hidden {
-  display: none;
+  display: none !important;
+}
+
+#external-link-modal:not(.hidden) {
+  display: flex !important;
 }
 
 #external-link-modal .bg-white {

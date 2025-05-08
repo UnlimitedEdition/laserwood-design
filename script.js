@@ -78,8 +78,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 // External link modal handling
-window.addEventListener('load', () => {
-  console.log('Window loaded, initializing external link modal');
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, initializing external link modal');
   const externalLinkBtn = document.getElementById('external-link-btn');
   const externalLinkModal = document.getElementById('external-link-modal');
   const externalLinkContinue = document.getElementById('external-link-continue');
@@ -104,6 +104,7 @@ window.addEventListener('load', () => {
       externalLinkContinue.setAttribute('href', url);
       console.log('Set href on continue button:', externalLinkContinue.getAttribute('href'));
       externalLinkModal.classList.remove('hidden');
+      console.log('Modal opened, classList:', externalLinkModal.classList);
       externalLinkModal.focus();
     } else {
       console.error('External link URL is missing');
