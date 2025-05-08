@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://unlimitededition.github.io/laserwood-design/sitemap.xml

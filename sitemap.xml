@@ -1,0 +1,96 @@
+const slides = [
+  './Images/IMG_001.webp', './Images/IMG_002.webp', './Images/IMG_003.webp',
+  './Images/IMG_004.webp', './Images/IMG_005.webp', './Images/IMG_006.webp',
+  './Images/IMG_007.webp', './Images/IMG_008.webp', './Images/IMG_009.webp',
+  './Images/IMG_010.webp', './Images/IMG_011.webp', './Images/IMG_012.webp',
+  './Images/IMG_013.webp', './Images/IMG_014.webp', './Images/IMG_015.webp',
+  './Images/IMG_016.webp', './Images/IMG_017.webp', './Images/IMG_018.webp',
+  './Images/IMG_019.webp', './Images/IMG_020.webp', './Images/IMG_021.webp',
+  './Images/IMG_022.webp', './Images/IMG_023.webp', './Images/IMG_024.webp',
+  './Images/IMG_025.webp', './Images/IMG_026.webp', './Images/IMG_027.webp',
+  './Images/IMG_028.webp', './Images/IMG_029.webp', './Images/IMG_030.webp',
+  './Images/IMG_031.webp', './Images/IMG_032.webp', './Images/IMG_033.webp',
+  './Images/IMG_034.webp', './Images/IMG_035.webp', './Images/IMG_036.webp',
+  './Images/IMG_037.webp', './Images/IMG_038.webp', './Images/IMG_039.webp',
+  './Images/IMG_040.webp', './Images/IMG_041.webp', './Images/IMG_042.webp',
+  './Images/IMG_043.webp', './Images/IMG_044.webp', './Images/logo_1.webp'
+];
+
+let currentIndex = 0;
+const modal = document.getElementById('modal');
+const modalImage = document.getElementById('modalImage');
+const gallery = document.getElementById('gallery');
+
+// Load gallery images
+if (gallery) {
+  slides.forEach((slide, index) => {
+    const img = document.createElement('img');
+    img.src = slide;
+    const altText = slide.replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
+    img.alt = altText;
+    img.loading = 'lazy';
+    img.onclick = () => openModal(index);
+    gallery.appendChild(img);
+  });
+}
+
+// Gallery modal functions
+function openModal(index) {
+  if (modal && modalImage) {
+    currentIndex = index;
+    modalImage.src = slides[index];
+    const altText = slides[index].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
+    modalImage.alt = altText;
+    modal.classList.add('show');
+    modalImage.focus();
+  }
+}
+
+function closeModal() {
+  if (modal) {
+    modal.classList.remove('show');
+  }
+}
+
+function changeImage(direction) {
+  if (modal && modalImage) {
+    currentIndex = (currentIndex + direction + slides.length) % slides.length;
+    modalImage.src = slides[currentIndex];
+    const altText = slides[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
+    modalImage.alt = altText;
+  }
+}
+
+// Keyboard navigation for modal
+document.addEventListener('keydown', (e) => {
+  if (modal && modal.classList.contains('show')) {
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'Escape') closeModal();
+  }
+});
+
+// Refresh TikTok iframe
+window.addEventListener('load', () => {
+  const tiktokIframe = document.getElementById('tiktok-feed');
+  if (tiktokIframe) {
+    const baseSrc = tiktokIframe.src.split('?')[0];
+    const randomParam = 't=' + new Date().getTime();
+    tiktokIframe.src = baseSrc + '?' + randomParam;
+  }
+});
+
+// Contact form validation
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      if (!name || !email) {
+        e.preventDefault();
+        alert('Molimo popunite sva obavezna polja!');
+      }
+    });
+  }
+});

@@ -1,20 +1,8 @@
 const slides = [
-  './Images/IMG_001.webp', './Images/IMG_001.webp', './Images/IMG_002.webp',
-  './Images/IMG_003.webp', './Images/IMG_004.webp', './Images/IMG_005.webp',
-  './Images/IMG_006.webp', './Images/IMG_007.webp', './Images/IMG_008.webp',
-  './Images/IMG_009.webp', './Images/IMG_010.webp', './Images/IMG_011.webp',
-  './Images/IMG_012.webp', './Images/IMG_013.webp', './Images/IMG_014.webp',
-  './Images/IMG_015.webp', './Images/IMG_016.webp', './Images/IMG_017.webp',
-  './Images/IMG_018.webp', './Images/IMG_019.webp', './Images/IMG_020.webp',
-  './Images/IMG_021.webp', './Images/IMG_022.webp', './Images/IMG_023.webp',
-  './Images/IMG_024.webp', './Images/IMG_025.webp', './Images/IMG_026.webp',
-  './Images/IMG_027.webp', './Images/IMG_028.webp', './Images/IMG_029.webp',
-  './Images/IMG_030.webp', './Images/IMG_031.webp', './Images/IMG_032.webp',
-  './Images/IMG_033.webp', './Images/IMG_034.webp', './Images/IMG_035.webp',
-  './Images/IMG_036.webp', './Images/IMG_037.webp', './Images/IMG_038.webp',
-  './Images/IMG_039.webp', './Images/IMG_040.webp', './Images/IMG_041.webp',
-  './Images/IMG_042.webp', './Images/IMG_043.webp', './Images/IMG_044.webp',
-  './Images/logo_1.webp'
+  './Images/IMG_003.webp',
+  './Images/IMG_004.webp',
+  './Images/IMG_005.webp',
+  './Images/IMG_006.webp'
 ];
 
 let currentIndex = 0;
@@ -22,41 +10,52 @@ const modal = document.getElementById('modal');
 const modalImage = document.getElementById('modalImage');
 const gallery = document.getElementById('gallery');
 
-// Load gallery images (only runs in gallery.html where id="gallery" exists)
+// Load gallery images (za gallery.html)
 if (gallery) {
-  console.log('Initializing gallery...');
-  slides.forEach((slide, index) => {
+  const gallerySlides = [
+    './Images/IMG_001.webp', './Images/IMG_002.webp', './Images/IMG_003.webp',
+    './Images/IMG_004.webp', './Images/IMG_005.webp', './Images/IMG_006.webp',
+    './Images/IMG_007.webp', './Images/IMG_008.webp', './Images/IMG_009.webp',
+    './Images/IMG_010.webp', './Images/IMG_011.webp', './Images/IMG_012.webp',
+    './Images/IMG_013.webp', './Images/IMG_014.webp', './Images/IMG_015.webp',
+    './Images/IMG_016.webp', './Images/IMG_017.webp', './Images/IMG_018.webp',
+    './Images/IMG_019.webp', './Images/IMG_020.webp', './Images/IMG_021.webp',
+    './Images/IMG_022.webp', './Images/IMG_023.webp', './Images/IMG_024.webp',
+    './Images/IMG_025.webp', './Images/IMG_026.webp', './Images/IMG_027.webp',
+    './Images/IMG_028.webp', './Images/IMG_029.webp', './Images/IMG_030.webp',
+    './Images/IMG_031.webp', './Images/IMG_032.webp', './Images/IMG_033.webp',
+    './Images/IMG_034.webp', './Images/IMG_035.webp', './Images/IMG_036.webp',
+    './Images/IMG_037.webp', './Images/IMG_038.webp', './Images/IMG_039.webp',
+    './Images/IMG_040.webp', './Images/IMG_041.webp', './Images/IMG_042.webp',
+    './Images/IMG_043.webp', './Images/IMG_044.webp', './Images/logo_1.webp'
+  ];
+  gallerySlides.forEach((slide, index) => {
     const img = document.createElement('img');
     img.src = slide;
     const altText = slide.replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
     img.alt = altText;
     img.loading = 'lazy';
-    img.onerror = () => console.error('Error loading image:', slide);
-    img.onload = () => console.log('Image loaded:', slide);
-    img.onclick = () => openModal(index);
+    img.classList.add('hover-glow');
+    img.onclick = () => openModal(index, gallerySlides);
     gallery.appendChild(img);
   });
-} else {
-  console.log('No gallery element found. Skipping gallery initialization.');
 }
 
-// Gallery modal functions (only used in gallery.html)
-function openModal(index) {
+// Modal functions for gallery
+function openModal(index, slideArray = slides) {
   if (modal && modalImage) {
     currentIndex = index;
-    modalImage.src = slides[index];
-    const altText = slides[index].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
+    modalImage.src = slideArray[index];
+    const altText = slideArray[index].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
     modalImage.alt = altText;
-    modal.style.display = 'flex';
+    modal.classList.add('show');
     modalImage.focus();
-    console.log('Modal opened, image:', slides[index]);
   }
 }
 
 function closeModal() {
   if (modal) {
-    modal.style.display = 'none';
-    console.log('Modal closed.');
+    modal.classList.remove('show');
   }
 }
 
@@ -66,26 +65,175 @@ function changeImage(direction) {
     modalImage.src = slides[currentIndex];
     const altText = slides[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
     modalImage.alt = altText;
-    console.log('Image changed, new image:', slides[currentIndex]);
   }
 }
 
-// Keyboard navigation for modal (only active when modal is open)
+// Keyboard navigation for gallery modal
 document.addEventListener('keydown', (e) => {
-  if (modal && modal.style.display === 'flex') {
+  if (modal && modal.classList.contains('show')) {
     if (e.key === 'ArrowLeft') changeImage(-1);
     if (e.key === 'ArrowRight') changeImage(1);
     if (e.key === 'Escape') closeModal();
   }
 });
 
-// Refresh TikTok iframe on page load (only runs in index.html where id="tiktok-feed" exists)
-window.addEventListener('load', () => {
-  const tiktokIframe = document.getElementById('tiktok-feed');
-  if (tiktokIframe) {
-    const baseSrc = tiktokIframe.src.split('?')[0];
-    const randomParam = 't=' + new Date().getTime();
-    tiktokIframe.src = baseSrc + '?' + randomParam;
-    console.log('TikTok iframe refreshed:', tiktokIframe.src);
+// External link modal handling
+document.addEventListener('DOMContentLoaded', () => {
+  const externalLinkBtn = document.getElementById('external-link-btn');
+  const externalLinkModal = document.getElementById('external-link-modal');
+  const externalLinkContinue = document.getElementById('external-link-continue');
+  const externalLinkCancel = document.getElementById('external-link-cancel');
+
+  if (externalLinkBtn && externalLinkModal && externalLinkContinue && externalLinkCancel) {
+    console.log('External link elements initialized');
+    externalLinkBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = externalLinkBtn.getAttribute('data-url');
+      console.log('External link button clicked, URL:', url);
+      if (url) {
+        externalLinkContinue.setAttribute('href', url);
+        externalLinkModal.classList.remove('hidden');
+        externalLinkModal.focus();
+      } else {
+        console.error('External link URL is missing');
+      }
+    });
+
+    externalLinkContinue.addEventListener('click', () => {
+      console.log('Continue button clicked, redirecting to:', externalLinkContinue.getAttribute('href'));
+      externalLinkModal.classList.add('hidden');
+    });
+
+    externalLinkCancel.addEventListener('click', () => {
+      console.log('Cancel button clicked');
+      externalLinkModal.classList.add('hidden');
+    });
+
+    // Close modal on outside click
+    externalLinkModal.addEventListener('click', (e) => {
+      if (e.target === externalLinkModal) {
+        console.log('Modal closed by clicking outside');
+        externalLinkModal.classList.add('hidden');
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !externalLinkModal.classList.contains('hidden')) {
+        console.log('Modal closed by Escape key');
+        externalLinkModal.classList.add('hidden');
+      }
+    });
+  } else {
+    console.error('External link modal elements not found');
   }
+
+  // Cookie Consent Handling
+  const cookieConsent = document.getElementById('cookie-consent');
+  const acceptCookies = document.getElementById('accept-cookies');
+  const declineCookies = document.getElementById('decline-cookies');
+  const tiktokFeed = document.getElementById('tiktok-feed');
+  const tiktokFallback = document.getElementById('tiktok-fallback');
+
+  if (cookieConsent && acceptCookies && declineCookies) {
+    // Check if user has already made a choice
+    if (!localStorage.getItem('cookieConsent')) {
+      cookieConsent.classList.remove('hidden');
+    }
+
+    acceptCookies.addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'accepted');
+      cookieConsent.classList.add('hidden');
+      // Reload TikTok feed
+      if (tiktokFeed) {
+        console.log('Cookies accepted, reloading TikTok feed');
+        tiktokFeed.src = tiktokFeed.src;
+      }
+    });
+
+    declineCookies.addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'declined');
+      cookieConsent.classList.add('hidden');
+      // Show fallback if TikTok feed is blocked
+      if (tiktokFeed && tiktokFallback) {
+        console.log('Cookies declined, showing TikTok fallback');
+        tiktokFeed.classList.add('hidden');
+        tiktokFallback.classList.remove('hidden');
+      }
+    });
+  }
+
+  // Check if TikTok feed loaded successfully
+  if (tiktokFeed && tiktokFallback) {
+    tiktokFeed.addEventListener('load', () => {
+      console.log('TikTok feed loaded successfully');
+      tiktokFallback.classList.add('hidden');
+      tiktokFeed.classList.remove('hidden');
+    });
+    tiktokFeed.addEventListener('error', () => {
+      console.error('Error loading TikTok feed');
+      tiktokFallback.classList.remove('hidden');
+      tiktokFeed.classList.add('hidden');
+    });
+  }
+
+  // Contact form handling
+  const form = document.getElementById('contact-form');
+  const formMessage = document.getElementById('form-message');
+
+  if (form && formMessage) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (!name || !email || !message) {
+        formMessage.textContent = 'Molimo popunite sva obavezna polja!';
+        formMessage.classList.add('text-red-600');
+        return;
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email, message })
+        });
+
+        if (response.ok) {
+          formMessage.textContent = 'Poruka je uspešno poslata! Uskoro ćemo vam se javiti.';
+          formMessage.classList.remove('text-red-600');
+          formMessage.classList.add('text-green-600');
+          form.reset();
+        } else {
+          const error = await response.json();
+          formMessage.textContent = 'Došlo je do greške. Pokušajte ponovo ili nas kontaktirajte direktno.';
+          formMessage.classList.add('text-red-600');
+          console.error('Formspree error:', error);
+        }
+      } catch (err) {
+        formMessage.textContent = 'Došlo je do greške. Proverite internet vezu ili nas kontaktirajte direktno.';
+        formMessage.classList.add('text-red-600');
+        console.error('Network error:', err);
+      }
+    });
+  }
+
+  // Fade-in animacije prilikom skrolovanja
+  const fadeElements = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0.2s';
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, { threshold: 0.2 });
+
+  fadeElements.forEach(el => observer.observe(el));
 });
