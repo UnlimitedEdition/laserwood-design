@@ -79,54 +79,62 @@ document.addEventListener('keydown', (e) => {
 
 // External link modal handling
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, initializing external link modal');
   const externalLinkBtn = document.getElementById('external-link-btn');
   const externalLinkModal = document.getElementById('external-link-modal');
   const externalLinkContinue = document.getElementById('external-link-continue');
   const externalLinkCancel = document.getElementById('external-link-cancel');
 
-  if (externalLinkBtn && externalLinkModal && externalLinkContinue && externalLinkCancel) {
-    console.log('External link elements initialized');
-    externalLinkBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const url = externalLinkBtn.getAttribute('data-url');
-      console.log('External link button clicked, URL:', url);
-      if (url) {
-        externalLinkContinue.setAttribute('href', url);
-        externalLinkModal.classList.remove('hidden');
-        externalLinkModal.focus();
-      } else {
-        console.error('External link URL is missing');
-      }
+  if (!externalLinkBtn || !externalLinkModal || !externalLinkContinue || !externalLinkCancel) {
+    console.error('External link modal elements missing:', {
+      externalLinkBtn: !!externalLinkBtn,
+      externalLinkModal: !!externalLinkModal,
+      externalLinkContinue: !!externalLinkContinue,
+      externalLinkCancel: !!externalLinkCancel
     });
-
-    externalLinkContinue.addEventListener('click', () => {
-      console.log('Continue button clicked, redirecting to:', externalLinkContinue.getAttribute('href'));
-      externalLinkModal.classList.add('hidden');
-    });
-
-    externalLinkCancel.addEventListener('click', () => {
-      console.log('Cancel button clicked');
-      externalLinkModal.classList.add('hidden');
-    });
-
-    // Close modal on outside click
-    externalLinkModal.addEventListener('click', (e) => {
-      if (e.target === externalLinkModal) {
-        console.log('Modal closed by clicking outside');
-        externalLinkModal.classList.add('hidden');
-      }
-    });
-
-    // Close modal on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !externalLinkModal.classList.contains('hidden')) {
-        console.log('Modal closed by Escape key');
-        externalLinkModal.classList.add('hidden');
-      }
-    });
-  } else {
-    console.error('External link modal elements not found');
+    return;
   }
+
+  console.log('External link modal elements found');
+  externalLinkBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const url = externalLinkBtn.getAttribute('data-url');
+    console.log('External link button clicked, URL:', url);
+    if (url) {
+      externalLinkContinue.setAttribute('href', url);
+      console.log('Set href on continue button:', externalLinkContinue.getAttribute('href'));
+      externalLinkModal.classList.remove('hidden');
+      externalLinkModal.focus();
+    } else {
+      console.error('External link URL is missing');
+    }
+  });
+
+  externalLinkContinue.addEventListener('click', () => {
+    console.log('Continue button clicked, redirecting to:', externalLinkContinue.getAttribute('href'));
+    externalLinkModal.classList.add('hidden');
+  });
+
+  externalLinkCancel.addEventListener('click', () => {
+    console.log('Cancel button clicked');
+    externalLinkModal.classList.add('hidden');
+  });
+
+  // Close modal on outside click
+  externalLinkModal.addEventListener('click', (e) => {
+    if (e.target === externalLinkModal) {
+      console.log('Modal closed by clicking outside');
+      externalLinkModal.classList.add('hidden');
+    }
+  });
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !externalLinkModal.classList.contains('hidden')) {
+      console.log('Modal closed by Escape key');
+      externalLinkModal.classList.add('hidden');
+    }
+  });
 
   // Cookie Consent Handling
   const cookieConsent = document.getElementById('cookie-consent');
