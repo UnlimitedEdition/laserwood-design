@@ -78,8 +78,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 // External link modal handling
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded, initializing external link modal');
+window.addEventListener('load', () => {
+  console.log('Window loaded, initializing external link modal');
   const externalLinkBtn = document.getElementById('external-link-btn');
   const externalLinkModal = document.getElementById('external-link-modal');
   const externalLinkContinue = document.getElementById('external-link-continue');
@@ -135,8 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
       externalLinkModal.classList.add('hidden');
     }
   });
+});
 
-  // Cookie Consent Handling
+// Cookie Consent Handling
+document.addEventListener('DOMContentLoaded', () => {
   const cookieConsent = document.getElementById('cookie-consent');
   const acceptCookies = document.getElementById('accept-cookies');
   const declineCookies = document.getElementById('decline-cookies');
@@ -201,8 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
       widgetScript.addEventListener('load', checkFeedLoaded);
     }
   }
+});
 
-  // Contact form handling
+// Contact form handling
+document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contact-form');
   const formMessage = document.getElementById('form-message');
 
@@ -248,8 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+});
 
-  // Fade-in animacije prilikom skrolovanja
+// Fade-in animacije prilikom skrolovanja
+document.addEventListener('DOMContentLoaded', () => {
   const fadeElements = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
