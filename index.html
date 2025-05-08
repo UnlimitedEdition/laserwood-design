@@ -19,6 +19,14 @@
   <meta name="twitter:title" content="LaserWood Design - Početna">
   <meta name="twitter:description" content="Otkrijte usluge laserskog sečenja, graviranja i personalizovanih poklona u Beogradu.">
   <meta name="twitter:image" content="./Images/logo.webp">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMG3RE6V1X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TMG3RE6V1X');
+  </script>
   <link rel="canonical" href="https://unlimitededition.github.io/laserwood-design/">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -32,9 +40,9 @@
 </head>
 <body class="bg-gray-100 font-sans">
   <!-- Cookie Consent Banner -->
-  <div id="cookie-consent" class="fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 z-50 hidden">
+  <div id="cookie-consent" class="fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 z-[1001] hidden">
     <div class="container mx-auto flex justify-between items-center">
-      <p class="font-open-sans">Ova stranica koristi kolačiće za poboljšanje korisničkog iskustva, uključujući kolačiće treće strane od SociableKit-a za prikaz TikTok feed-a. Prihvatanjem dozvoljavate upotrebu svih kolačića.</p>
+      <p class="font-open-sans">Ova stranica koristi kolačiće za poboljšanje korisničkog iskustva, uključujući kolačiće treće strane od SociableKit-a za TikTok feed i Google Analytics za analitiku. Prihvatanjem dozvoljavate upotrebu svih kolačića.</p>
       <div>
         <button id="accept-cookies" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 font-poppins mr-2">Prihvati</button>
         <button id="decline-cookies" class="bg-gray-600 text-white px-4 py-2 rounded-full hover:bg-gray-700 font-poppins">Odbij</button>
@@ -43,9 +51,9 @@
   </div>
 
   <!-- External Link Modal -->
-  <div id="external-link-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+  <div id="external-link-modal" class="modal fixed inset-0 bg-black bg-opacity-50 z-[1000] hidden flex justify-center items-center" role="dialog" aria-labelledby="modal-title" aria-modal="true">
     <div class="bg-white p-6 rounded-lg max-w-lg mx-4 text-center">
-      <h2 class="text-2xl font-bold mb-4 font-poppins">Napuštate naš sajt</h2>
+      <h2 id="modal-title" class="text-2xl font-bold mb-4 font-poppins">Napuštate naš sajt</h2>
       <p class="text-gray-600 mb-6 font-open-sans">Bićete preusmereni na eksterni sajt za kreiranje prilagođenih šablona. Molimo vas da napravite screenshot željenog proizvoda i pošaljete nam ga putem <a href="mailto:laserwooooddesign@gmail.com" class="text-green-600 hover:underline">e-pošte</a> ili <a href="https://wa.me/381693349457" class="text-green-600 hover:underline">WhatsApp-a</a>.</p>
       <div class="flex justify-center space-x-4">
         <a id="external-link-continue" href="https://boxes.hackerspace-bamberg.de/?language=en" target="_blank" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 font-poppins hover-glow">Nastavi</a>
@@ -55,13 +63,32 @@
   </div>
 
   <!-- Navigacija -->
-  <nav class="bg-white shadow-md sticky top-0 z-40">
+  <nav class="bg-white shadow-md sticky top-0 z-[1002]">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center">
         <img src="./Images/logo.webp" alt="LaserWood Design Logo" class="h-12 mr-3 logo-pulse" loading="lazy">
         <a href="index.html" class="text-2xl font-bold text-gray-800 font-poppins">LaserWood Design</a>
       </div>
-      <ul class="flex space-x-6">
+      <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+      <ul id="desktop-menu" class="hidden md:flex space-x-6">
+        <li><a href="index.html" class="text-gray-600 hover:text-green-600 font-poppins">Početna</a></li>
+        <li><a href="services.html" class="text-gray-600 hover:text-green-600 font-poppins">Usluge</a></li>
+        <li><a href="gallery.html" class="text-gray-600 hover:text-green-600 font-poppins">Galerija</a></li>
+        <li><a href="contact.html" class="text-gray-600 hover:text-green-600 font-poppins">Kontakt</a></li>
+        <li><a href="privacy-policy.html" class="text-gray-600 hover:text-green-600 font-poppins">Privatnost</a></li>
+      </ul>
+    </div>
+    <!-- Mobilni meni -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md absolute top-0 left-0 w-full z-[1003]">
+      <div class="flex justify-between items-center px-4 py-4">
+        <a href="index.html" class="text-2xl font-bold text-gray-800 font-poppins">LaserWood Design</a>
+        <button id="mobile-menu-close" class="text-gray-600 focus:outline-none">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
+      <ul class="flex flex-col space-y-4 px-4 pb-4">
         <li><a href="index.html" class="text-gray-600 hover:text-green-600 font-poppins">Početna</a></li>
         <li><a href="services.html" class="text-gray-600 hover:text-green-600 font-poppins">Usluge</a></li>
         <li><a href="gallery.html" class="text-gray-600 hover:text-green-600 font-poppins">Galerija</a></li>
@@ -72,40 +99,40 @@
   </nav>
 
   <!-- Hero sekcija -->
-  <section class="hero-bg bg-cover bg-center h-screen flex items-center justify-center text-center text-white parallax">
+  <section class="hero-bg bg-cover bg-center h-[80vh] md:h-screen flex items-center justify-center text-center text-white parallax">
     <div class="container mx-auto px-4">
-      <h1 class="text-5xl font-bold mb-4 font-poppins fade-in">Dobrodošli u LaserWood Design</h1>
-      <p class="text-xl mb-8 font-open-sans fade-in">Pretvaramo vaše ideje u stvarnost uz precizno lasersko sečenje i graviranje.</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 font-poppins fade-in">Dobrodošli u LaserWood Design</h1>
+      <p class="text-lg md:text-xl mb-8 font-open-sans fade-in">Pretvaramo vaše ideje u stvarnost uz precizno lasersko sečenje i graviranje.</p>
       <a href="contact.html" class="bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 font-poppins hover-glow fade-in">Kontaktirajte nas</a>
     </div>
   </section>
 
   <!-- O nama sekcija -->
-  <section class="py-16 bg-white">
+  <section class="py-12 md:py-16 bg-white">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-6 font-poppins fade-in">O nama</h2>
-      <p class="text-lg text-gray-600 mb-12 font-open-sans fade-in">LaserWood Design je posvećen pružanju vrhunskih usluga laserskog sečenja, graviranja i izrade personalizovanih poklona. Sa sedištem u Beogradu, naš tim stručnjaka koristi najsavremeniju tehnologiju kako bi ispunio vaše jedinstvene zahteve.</p>
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 font-poppins fade-in">O nama</h2>
+      <p class="text-base md:text-lg text-gray-600 mb-8 md:mb-12 font-open-sans fade-in">LaserWood Design je posvećen pružanju vrhunskih usluga laserskog sečenja, graviranja i izrade personalizovanih poklona. Sa sedištem u Beogradu, naš tim stručnjaka koristi najsavremeniju tehnologiju kako bi ispunio vaše jedinstvene zahteve.</p>
       <a href="services.html" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 font-poppins hover-glow">Saznaj više</a>
     </div>
   </section>
 
   <!-- Kreirajte svoje šablone sekcija -->
-  <section class="py-16 bg-gray-100">
+  <section class="py-12 md:py-16 bg-gray-100">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-6 font-poppins fade-in">Kreirajte svoje šablone</h2>
-      <p class="text-lg text-gray-600 mb-8 font-open-sans fade-in">Dizajnirajte prilagođene kutije ili druge proizvode sa tačnim merama uz naš partnerski alat. Napravite screenshot vašeg dizajna i pošaljete nam ga za izradu.</p>
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 font-poppins fade-in">Kreirajte svoje šablone</h2>
+      <p class="text-base md:text-lg text-gray-600 mb-8 font-open-sans fade-in">Dizajnirajte prilagođene kutije ili druge proizvode sa tačnim merama uz naš partnerski alat. Napravite screenshot vašeg dizajna i pošaljete nam ga za izradu.</p>
       <button id="external-link-btn" data-url="https://boxes.hackerspace-bamberg.de/?language=en" class="bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 font-poppins hover-glow">Kreiraj šablon</button>
     </div>
   </section>
 
   <!-- TikTok Feed -->
-  <section class="py-16 bg-gray-100">
+  <section class="py-12 md:py-16 bg-gray-100">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-6 font-poppins fade-in">Naš TikTok Feed</h2>
-      <div id="tiktok-feed-container">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 font-poppins fade-in">Naš TikTok Feed</h2>
+      <div id="tiktok-feed-container" class="overflow-hidden">
         <div id="sk-tiktok-feed" class="sk-tiktok-feed" data-embed-id="25553416"></div>
         <div id="tiktok-fallback" class="hidden text-gray-600 font-open-sans mt-4">
-          <p>Nismo mogli učitati TikTok feed. Posetite naš profil direktno na <a href="https://www.tiktok.com/@laserwooooddesign" target="_blank" class="text-green-600 hover:underline">TikTok</a>.</p>
+          <p>Ako se nije učitao TikTok feed. Posetite naš profil direktno na <a href="https://www.tiktok.com/@laserwooooddesign" target="_blank" class="text-green-600 hover:underline">TikTok</a>. Hvala </p>
         </div>
       </div>
     </div>
@@ -114,13 +141,13 @@
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4 text-center">
-      <div class="social-icons mb-4">
-        <a href="viber://chat?number=%2B381693349457" aria-label="Kontaktirajte nas na Viber" class="text-gray-400 hover:text-white mx-2"><i class="fab fa-viber text-2xl"></i></a>
-        <a href="https://wa.me/381693349457" aria-label="Kontaktirajte nas na WhatsApp" class="text-gray-400 hover:text-white mx-2"><i class="fab fa-whatsapp text-2xl"></i></a>
-        <a href="https://www.tiktok.com/@laserwooooddesign" target="_blank" aria-label="Posetite naš TikTok profil" class="text-gray-400 hover:text-white mx-2"><i class="fab fa-tiktok text-2xl"></i></a>
+      <div class="social-icons mb-4 flex justify-center space-x-4">
+        <a href="viber://chat?number=%2B381693349457" aria-label="Kontaktirajte nas na Viber" class="text-gray-400 hover:text-white"><i class="fab fa-viber text-3xl"></i></a>
+        <a href="https://wa.me/381693349457" aria-label="Kontaktirajte nas na WhatsApp" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp text-3xl"></i></a>
+        <a href="https://www.tiktok.com/@laserwooooddesign" target="_blank" aria-label="Posetite naš TikTok profil" class="text-gray-400 hover:text-white"><i class="fab fa-tiktok text-3xl"></i></a>
       </div>
-      <p class="font-open-sans">© 2025 LaserWood Design. Milan Tošić (Toške). Sva prava zadržana.</p>
-      <p class="font-open-sans">Kontakt: <a href="mailto:laserwooooddesign@gmail.com" class="text-gray-400 hover:text-white">laserwooooddesign@gmail.com</a></p>
+      <p class="font-open-sans text-sm md:text-base">© 2025 LaserWood Design. Milan Tošić (Toške). Sva prava zadržana.</p>
+      <p class="font-open-sans text-sm md:text-base">Kontakt: <a href="mailto:laserwooooddesign@gmail.com" class="text-gray-400 hover:text-white">laserwooooddesign@gmail.com</a></p>
     </div>
   </footer>
 

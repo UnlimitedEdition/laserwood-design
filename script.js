@@ -50,12 +50,14 @@ function openModal(index, slideArray = slides) {
     modalImage.alt = altText;
     modal.classList.add('show');
     modalImage.focus();
+    console.log('Gallery modal opened, image:', slideArray[index]);
   }
 }
 
 function closeModal() {
   if (modal) {
     modal.classList.remove('show');
+    console.log('Gallery modal closed');
   }
 }
 
@@ -65,8 +67,41 @@ function changeImage(direction) {
     modalImage.src = slides[currentIndex];
     const altText = slides[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
     modalImage.alt = altText;
+    console.log('Gallery image changed, new image:', slides[currentIndex]);
   }
 }
+
+// Gallery modal event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  const closeBtn = document.querySelector('.close');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      closeModal();
+      console.log('Gallery modal closed via close button');
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => changeImage(-1));
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => changeImage(1));
+  }
+
+  // Close modal on outside click
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+        console.log('Gallery modal closed by clicking outside');
+      }
+    });
+  }
+});
 
 // Keyboard navigation for gallery modal
 document.addEventListener('keydown', (e) => {
@@ -74,6 +109,55 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') changeImage(-1);
     if (e.key === 'ArrowRight') changeImage(1);
     if (e.key === 'Escape') closeModal();
+  }
+});
+
+// Hamburger menu handling
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+  if (mobileMenuBtn && mobileMenu && mobileMenuClose) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      console.log('Mobile menu toggled:', mobileMenu.classList);
+    });
+
+    mobileMenuClose.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      console.log('Mobile menu closed via close button');
+    });
+
+    // Close menu on outside click
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        console.log('Mobile menu closed by clicking outside');
+      }
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        console.log('Mobile menu closed by Escape key');
+      }
+    });
+
+    // Close menu when a menu item is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        console.log('Mobile menu closed after selecting an item');
+      });
+    });
+  } else {
+    console.error('Mobile menu elements missing:', {
+      mobileMenuBtn: !!mobileMenuBtn,
+      mobileMenu: !!mobileMenu,
+      mobileMenuClose: !!mobileMenuClose
+    });
   }
 });
 
@@ -105,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Set href on continue button:', externalLinkContinue.getAttribute('href'));
       externalLinkModal.classList.remove('hidden');
       console.log('Modal opened, classList:', externalLinkModal.classList);
+      externalLinkModal.setAttribute('aria-hidden', 'false');
       externalLinkModal.focus();
     } else {
       console.error('External link URL is missing');
@@ -114,11 +199,13 @@ document.addEventListener('DOMContentLoaded', () => {
   externalLinkContinue.addEventListener('click', () => {
     console.log('Continue button clicked, redirecting to:', externalLinkContinue.getAttribute('href'));
     externalLinkModal.classList.add('hidden');
+    externalLinkModal.setAttribute('aria-hidden', 'true');
   });
 
   externalLinkCancel.addEventListener('click', () => {
     console.log('Cancel button clicked');
     externalLinkModal.classList.add('hidden');
+    externalLinkModal.setAttribute('aria-hidden', 'true');
   });
 
   // Close modal on outside click
@@ -126,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === externalLinkModal) {
       console.log('Modal closed by clicking outside');
       externalLinkModal.classList.add('hidden');
+      externalLinkModal.setAttribute('aria-hidden', 'true');
     }
   });
 
@@ -134,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && !externalLinkModal.classList.contains('hidden')) {
       console.log('Modal closed by Escape key');
       externalLinkModal.classList.add('hidden');
+      externalLinkModal.setAttribute('aria-hidden', 'true');
     }
   });
 });
@@ -147,7 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tiktokFallback = document.getElementById('tiktok-fallback');
 
   if (cookieConsent && acceptCookies && declineCookies) {
-    // Check if user has already made a choice
     if (!localStorage.getItem('cookieConsent')) {
       cookieConsent.classList.remove('hidden');
     }
@@ -155,12 +243,10 @@ document.addEventListener('DOMContentLoaded', () => {
     acceptCookies.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'accepted');
       cookieConsent.classList.add('hidden');
-      // Load TikTok feed
       if (tiktokFeed) {
         console.log('Cookies accepted, loading SociableKit TikTok feed');
         tiktokFeed.classList.remove('hidden');
         tiktokFallback.classList.add('hidden');
-        // Trigger widget load if necessary
         const script = document.createElement('script');
         script.src = 'https://widgets.sociablekit.com/tiktok-feed/widget.js';
         script.async = true;
@@ -171,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
     declineCookies.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'declined');
       cookieConsent.classList.add('hidden');
-      // Show fallback if TikTok feed is blocked
       if (tiktokFeed && tiktokFallback) {
         console.log('Cookies declined, showing TikTok fallback');
         tiktokFeed.classList.add('hidden');
@@ -180,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Check if SociableKit TikTok feed loaded successfully
   if (tiktokFeed && tiktokFallback) {
     const checkFeedLoaded = () => {
       const feedContent = tiktokFeed.querySelector('.sk-ww-tiktok-feed');
@@ -195,10 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Check after a delay to allow widget to load
     setTimeout(checkFeedLoaded, 5000);
-
-    // Re-check on script load
     const widgetScript = document.querySelector('script[src="https://widgets.sociablekit.com/tiktok-feed/widget.js"]');
     if (widgetScript) {
       widgetScript.addEventListener('load', checkFeedLoaded);

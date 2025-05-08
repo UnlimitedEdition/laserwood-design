@@ -32,13 +32,32 @@
 </head>
 <body class="bg-gray-100 font-sans">
   <!-- Navigacija -->
-  <nav class="bg-white shadow-md sticky top-0 z-50">
+  <nav class="bg-white shadow-md sticky top-0 z-[1002]">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center">
         <img src="./Images/logo.webp" alt="LaserWood Design Logo" class="h-12 mr-3 logo-pulse" loading="lazy">
         <a href="index.html" class="text-2xl font-bold text-gray-800 font-poppins">LaserWood Design</a>
       </div>
-      <ul class="flex space-x-6">
+      <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+      <ul id="desktop-menu" class="hidden md:flex space-x-6">
+        <li><a href="index.html" class="text-gray-600 hover:text-green-600 font-poppins">Početna</a></li>
+        <li><a href="services.html" class="text-gray-600 hover:text-green-600 font-poppins">Usluge</a></li>
+        <li><a href="gallery.html" class="text-gray-600 hover:text-green-600 font-poppins">Galerija</a></li>
+        <li><a href="contact.html" class="text-gray-600 hover:text-green-600 font-poppins">Kontakt</a></li>
+        <li><a href="privacy-policy.html" class="text-gray-600 hover:text-green-600 font-poppins">Privatnost</a></li>
+      </ul>
+    </div>
+    <!-- Mobilni meni -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md absolute top-0 left-0 w-full z-[1003]">
+      <div class="flex justify-between items-center px-4 py-4">
+        <a href="index.html" class="text-2xl font-bold text-gray-800 font-poppins">LaserWood Design</a>
+        <button id="mobile-menu-close" class="text-gray-600 focus:outline-none">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
+      <ul class="flex flex-col space-y-4 px-4 pb-4">
         <li><a href="index.html" class="text-gray-600 hover:text-green-600 font-poppins">Početna</a></li>
         <li><a href="services.html" class="text-gray-600 hover:text-green-600 font-poppins">Usluge</a></li>
         <li><a href="gallery.html" class="text-gray-600 hover:text-green-600 font-poppins">Galerija</a></li>
