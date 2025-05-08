@@ -34,7 +34,7 @@
   <!-- Cookie Consent Banner -->
   <div id="cookie-consent" class="fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 z-50 hidden">
     <div class="container mx-auto flex justify-between items-center">
-      <p class="font-open-sans">Ova stranica koristi kolačiće za poboljšanje korisničkog iskustva, uključujući kolačiće treće strane od TikTok-a za prikaz feed-a. Prihvatanjem dozvoljavate upotrebu svih kolačića.</p>
+      <p class="font-open-sans">Ova stranica koristi kolačiće za poboljšanje korisničkog iskustva, uključujući kolačiće treće strane od SociableKit-a za prikaz TikTok feed-a. Prihvatanjem dozvoljavate upotrebu svih kolačića.</p>
       <div>
         <button id="accept-cookies" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 font-poppins mr-2">Prihvati</button>
         <button id="decline-cookies" class="bg-gray-600 text-white px-4 py-2 rounded-full hover:bg-gray-700 font-poppins">Odbij</button>
@@ -103,7 +103,7 @@
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-6 font-poppins fade-in">Naš TikTok Feed</h2>
       <div id="tiktok-feed-container">
-        <iframe id="tiktok-feed" src="https://www.tiktok.com/embed/v2/@laserwooooddesign" class="w-full h-96 mx-auto rounded-lg shadow-md" frameborder="0" allow="encrypted-media; clipboard-write" loading="lazy"></iframe>
+        <div id="sk-tiktok-feed" class="sk-tiktok-feed" data-embed-id="25553416"></div>
         <div id="tiktok-fallback" class="hidden text-gray-600 font-open-sans mt-4">
           <p>Nismo mogli učitati TikTok feed. Posetite naš profil direktno na <a href="https://www.tiktok.com/@laserwooooddesign" target="_blank" class="text-green-600 hover:underline">TikTok</a>.</p>
         </div>
@@ -125,5 +125,6 @@
   </footer>
 
   <script src="./script.js"></script>
+  <script src="https://widgets.sociablekit.com/tiktok-feed/widget.js" defer></script>
 </body>
 </html>

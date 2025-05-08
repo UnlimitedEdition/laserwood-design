@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cookieConsent = document.getElementById('cookie-consent');
   const acceptCookies = document.getElementById('accept-cookies');
   const declineCookies = document.getElementById('decline-cookies');
-  const tiktokFeed = document.getElementById('tiktok-feed');
+  const tiktokFeed = document.getElementById('sk-tiktok-feed');
   const tiktokFallback = document.getElementById('tiktok-fallback');
 
   if (cookieConsent && acceptCookies && declineCookies) {
@@ -144,10 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
     acceptCookies.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'accepted');
       cookieConsent.classList.add('hidden');
-      // Reload TikTok feed
+      // Load TikTok feed
       if (tiktokFeed) {
-        console.log('Cookies accepted, reloading TikTok feed');
-        tiktokFeed.src = tiktokFeed.src;
+        console.log('Cookies accepted, loading SociableKit TikTok feed');
+        tiktokFeed.classList.remove('hidden');
+        tiktokFallback.classList.add('hidden');
+        // Trigger widget load if necessary
+        const script = document.createElement('script');
+        script.src = 'https://widgets.sociablekit.com/tiktok-feed/widget.js';
+        script.async = true;
+        document.body.appendChild(script);
       }
     });
 
@@ -163,18 +169,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Check if TikTok feed loaded successfully
+  // Check if SociableKit TikTok feed loaded successfully
   if (tiktokFeed && tiktokFallback) {
-    tiktokFeed.addEventListener('load', () => {
-      console.log('TikTok feed loaded successfully');
-      tiktokFallback.classList.add('hidden');
-      tiktokFeed.classList.remove('hidden');
-    });
-    tiktokFeed.addEventListener('error', () => {
-      console.error('Error loading TikTok feed');
-      tiktokFallback.classList.remove('hidden');
-      tiktokFeed.classList.add('hidden');
-    });
+    const checkFeedLoaded = () => {
+      const feedContent = tiktokFeed.querySelector('.sk-ww-tiktok-feed');
+      if (feedContent && feedContent.children.length > 0) {
+        console.log('SociableKit TikTok feed loaded successfully');
+        tiktokFeed.classList.remove('hidden');
+        tiktokFallback.classList.add('hidden');
+      } else {
+        console.error('SociableKit TikTok feed failed to load');
+        tiktokFeed.classList.add('hidden');
+        tiktokFallback.classList.remove('hidden');
+      }
+    };
+
+    // Check after a delay to allow widget to load
+    setTimeout(checkFeedLoaded, 5000);
+
+    // Re-check on script load
+    const widgetScript = document.querySelector('script[src="https://widgets.sociablekit.com/tiktok-feed/widget.js"]');
+    if (widgetScript) {
+      widgetScript.addEventListener('load', checkFeedLoaded);
+    }
   }
 
   // Contact form handling
