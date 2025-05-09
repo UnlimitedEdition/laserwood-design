@@ -296,25 +296,21 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
+      const formData = new FormData(form);
 
-      if (!name || !email || !message) {
-        formMessage.textContent = 'Molimo popunite sva obavezna polja!';
-        formMessage.classList.add('text-red-600');
-        return;
-      }
+      // Logujemo podatke koji se šalju radi debagovanja
+      console.log('Form data:', Object.fromEntries(formData));
 
       try {
         const response = await fetch(form.action, {
           method: 'POST',
+          body: formData,
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ name, email, message })
+            'Accept': 'application/json'
+          }
         });
+
+        console.log('Formspree response status:', response.status);
 
         if (response.ok) {
           formMessage.textContent = 'Poruka je uspešno poslata! Uskoro ćemo vam se javiti.';
@@ -323,15 +319,20 @@ document.addEventListener('DOMContentLoaded', () => {
           form.reset();
         } else {
           const error = await response.json();
+          console.error('Formspree error:', error);
           formMessage.textContent = 'Došlo je do greške. Pokušajte ponovo ili nas kontaktirajte direktno.';
           formMessage.classList.add('text-red-600');
-          console.error('Formspree error:', error);
         }
       } catch (err) {
+        console.error('Network or CORS error:', err);
         formMessage.textContent = 'Došlo je do greške. Proverite internet vezu ili nas kontaktirajte direktno.';
         formMessage.classList.add('text-red-600');
-        console.error('Network error:', err);
       }
+    });
+  } else {
+    console.error('Contact form elements missing:', {
+      form: !!form,
+      formMessage: !!formMessage
     });
   }
 });
