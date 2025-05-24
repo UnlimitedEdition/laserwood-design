@@ -41,11 +41,8 @@ if (gallery) {
     './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_9.jpg',
     './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_10.jpg'
   ];
-  
-  // Uzmi random 12 slika iz cele kolekcije
-  const gallerySlides = allGallerySlides
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 12);
+    // Prikaži sve slike
+  const gallerySlides = allGallerySlides;
   gallerySlides.forEach((slide, index) => {
     const img = document.createElement('img');
     img.src = slide;
