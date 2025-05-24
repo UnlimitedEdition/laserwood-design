@@ -12,7 +12,7 @@ const gallery = document.getElementById('gallery');
 
 // Load gallery images (za gallery.html)
 if (gallery) {
-  const gallerySlides = [
+  const allGallerySlides = [
     './Images/IMG_001.webp', './Images/IMG_002.webp', './Images/IMG_003.webp',
     './Images/IMG_004.webp', './Images/IMG_005.webp', './Images/IMG_006.webp',
     './Images/IMG_007.webp', './Images/IMG_008.webp', './Images/IMG_009.webp',
@@ -27,8 +27,31 @@ if (gallery) {
     './Images/IMG_034.webp', './Images/IMG_035.webp', './Images/IMG_036.webp',
     './Images/IMG_037.webp', './Images/IMG_038.webp', './Images/IMG_039.webp',
     './Images/IMG_040.webp', './Images/IMG_041.webp', './Images/IMG_042.webp',
-    './Images/IMG_043.webp', './Images/IMG_044.webp', './Images/logo_1.webp'
+    './Images/IMG_043.webp', './Images/IMG_044.webp', './Images/logo_1.webp',
+    './Images/Činija1-1.jpg', './Images/Činija1.jpg', './Images/Činija2-1.jpg',
+    './Images/Činija2.jpg', './Images/Držač-za-olovke.jpg',
+    './Images/laser-cut-flower-vase-round-flower-stand-desi_2.jpg',
+    './Images/laser-cut-flower-vase-round-flower-stand-desi_3.jpg',
+    './Images/laser-cut-flower-vase-round-flower-stand-desi_4.jpg',
+    './Images/laser-cut-flower-vase-round-flower-stand-desi_6.jpg',
+    './Images/laser-cut-flower-vase-round-flower-stand-desi_7.jpg',
+    './Images/laser-cut-flower-vase-round-flower-stand-desi_8.jpg',
+    './Images/laser-cut-flower-vase-round-flower-stand-desi_9.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_1.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_2.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_3.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_4.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_5.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_6.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_7.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_9.jpg',
+    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_10.jpg'
   ];
+  
+  // Uzmi random 12 slika iz cele kolekcije
+  const gallerySlides = allGallerySlides
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 12);
   gallerySlides.forEach((slide, index) => {
     const img = document.createElement('img');
     img.src = slide;
