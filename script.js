@@ -1,10 +1,4 @@
-const slides = [
-  './Images/IMG_003.webp',
-  './Images/IMG_004.webp',
-  './Images/IMG_005.webp',
-  './Images/IMG_006.webp'
-];
-
+let currentSlideArray = [];
 let currentIndex = 0;
 const modal = document.getElementById('modal');
 const modalImage = document.getElementById('modalImage');
@@ -65,8 +59,9 @@ if (gallery) {
 }
 
 // Modal functions for gallery
-function openModal(index, slideArray = slides) {
+function openModal(index, slideArray) {
   if (modal && modalImage) {
+    currentSlideArray = slideArray; // Čuvamo trenutni niz slika
     currentIndex = index;
     modalImage.src = slideArray[index];
     const altText = slideArray[index].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
@@ -86,11 +81,11 @@ function closeModal() {
 
 function changeImage(direction) {
   if (modal && modalImage) {
-    currentIndex = (currentIndex + direction + slides.length) % slides.length;
-    modalImage.src = slides[currentIndex];
-    const altText = slides[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
+    currentIndex = (currentIndex + direction + currentSlideArray.length) % currentSlideArray.length;
+    modalImage.src = currentSlideArray[currentIndex];
+    const altText = currentSlideArray[currentIndex].replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
     modalImage.alt = altText;
-    console.log('Gallery image changed, new image:', slides[currentIndex]);
+    console.log('Gallery image changed, new image:', currentSlideArray[currentIndex]);
   }
 }
 
