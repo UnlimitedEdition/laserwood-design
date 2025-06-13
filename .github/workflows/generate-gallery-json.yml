@@ -1,0 +1,37 @@
+# This workflow runs on every push to main branch and updates gallery.json automatically
+name: Generate Gallery JSON
+
+on:
+  push:
+    paths:
+      - 'Images/**'
+      - 'generate-gallery-json.js'
+      - '.github/workflows/generate-gallery-json.yml'
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate gallery.json
+        run: node generate-gallery-json.js
+
+      - name: Commit and push gallery.json
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add gallery.json
+          git diff --cached --quiet || git commit -m "Auto-update gallery.json [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

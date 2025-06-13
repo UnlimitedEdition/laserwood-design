@@ -6,53 +6,88 @@ const gallery = document.getElementById('gallery');
 
 // Load gallery images (za gallery.html)
 if (gallery) {
-  const allGallerySlides = [
-    './Images/IMG_001.webp', './Images/IMG_002.webp', './Images/IMG_003.webp',
-    './Images/IMG_004.webp', './Images/IMG_005.webp', './Images/IMG_006.webp',
-    './Images/IMG_007.webp', './Images/IMG_008.webp', './Images/IMG_009.webp',
-    './Images/IMG_010.webp', './Images/IMG_011.webp', './Images/IMG_012.webp',
-    './Images/IMG_013.webp', './Images/IMG_014.webp', './Images/IMG_015.webp',
-    './Images/IMG_016.webp', './Images/IMG_017.webp', './Images/IMG_018.webp',
-    './Images/IMG_019.webp', './Images/IMG_020.webp', './Images/IMG_021.webp',
-    './Images/IMG_022.webp', './Images/IMG_023.webp', './Images/IMG_024.webp',
-    './Images/IMG_025.webp', './Images/IMG_026.webp', './Images/IMG_027.webp',
-    './Images/IMG_028.webp', './Images/IMG_029.webp', './Images/IMG_030.webp',
-    './Images/IMG_031.webp', './Images/IMG_032.webp', './Images/IMG_033.webp',
-    './Images/IMG_034.webp', './Images/IMG_035.webp', './Images/IMG_036.webp',
-    './Images/IMG_037.webp', './Images/IMG_038.webp', './Images/IMG_039.webp',
-    './Images/IMG_040.webp', './Images/IMG_041.webp', './Images/IMG_042.webp',
-    './Images/IMG_043.webp', './Images/IMG_044.webp', './Images/logo_1.webp',
-    './Images/Činija1-1.jpg', './Images/Činija1.jpg', './Images/Činija2-1.jpg',
-    './Images/Činija2.jpg', './Images/Držač-za-olovke.jpg',
-    './Images/laser-cut-flower-vase-round-flower-stand-desi_2.jpg',
-    './Images/laser-cut-flower-vase-round-flower-stand-desi_3.jpg',
-    './Images/laser-cut-flower-vase-round-flower-stand-desi_4.jpg',
-    './Images/laser-cut-flower-vase-round-flower-stand-desi_6.jpg',
-    './Images/laser-cut-flower-vase-round-flower-stand-desi_7.jpg',
-    './Images/laser-cut-flower-vase-round-flower-stand-desi_8.jpg',
-    './Images/laser-cut-flower-vase-round-flower-stand-desi_9.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_1.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_2.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_3.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_4.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_5.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_6.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_7.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_9.jpg',
-    './Images/laser-cut-flower-vase-template-flower-holder-flower-stand-3_10.jpg'
-  ];
-    // Prikaži sve slike
-  const gallerySlides = allGallerySlides;
-  gallerySlides.forEach((slide, index) => {
-    const img = document.createElement('img');
-    img.src = slide;
-    const altText = slide.replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace("./Images/", "");
-    img.alt = altText;
-    img.loading = 'lazy';
-    img.classList.add('hover-glow');
-    img.onclick = () => openModal(index, gallerySlides);
-    gallery.appendChild(img);
-  });
+
+  // PAGINATION SETTINGS
+  const IMAGES_PER_PAGE = 12;
+  let galleryData = [];
+  let currentPage = 1;
+  let totalPages = 1;
+  const paginationContainer = document.getElementById('gallery-pagination');
+
+  // Fetch gallery.json and render gallery
+  fetch('gallery.json')
+    .then(res => res.json())
+    .then(data => {
+      galleryData = data;
+      totalPages = Math.ceil(galleryData.length / IMAGES_PER_PAGE);
+      renderGalleryPage(currentPage);
+    })
+    .catch(err => {
+      gallery.innerHTML = '<p class="text-red-600">Greška pri učitavanju galerije.</p>';
+      if (paginationContainer) paginationContainer.innerHTML = '';
+      console.error('Greška pri učitavanju gallery.json:', err);
+    });
+
+  function renderGalleryPage(page) {
+    gallery.innerHTML = '';
+    const start = (page - 1) * IMAGES_PER_PAGE;
+    const end = start + IMAGES_PER_PAGE;
+    const pageImages = galleryData.slice(start, end);
+    pageImages.forEach((imgObj, idx) => {
+      const img = document.createElement('img');
+      img.src = imgObj.url;
+      const altText = imgObj.filename.replace(/\.[^/.]+$/, "").replace(/_/g, " ");
+      img.alt = altText;
+      img.loading = 'lazy';
+      img.classList.add('hover-glow');
+      img.onclick = () => openModal(idx, pageImages.map(i => i.url));
+      gallery.appendChild(img);
+    });
+    renderPagination(page);
+  }
+
+  function renderPagination(page) {
+    if (!paginationContainer) return;
+    paginationContainer.innerHTML = '';
+    // Prev button
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = 'Prethodna';
+    prevBtn.className = 'px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
+    prevBtn.disabled = page === 1;
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderGalleryPage(currentPage);
+      }
+    };
+    paginationContainer.appendChild(prevBtn);
+
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.textContent = i;
+      pageBtn.className = 'px-3 py-2 rounded font-poppins ' + (i === page ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-green-500 hover:text-white');
+      if (i === page) pageBtn.disabled = true;
+      pageBtn.onclick = () => {
+        currentPage = i;
+        renderGalleryPage(currentPage);
+      };
+      paginationContainer.appendChild(pageBtn);
+    }
+
+    // Next button
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Sledeća';
+    nextBtn.className = 'px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
+    nextBtn.disabled = page === totalPages;
+    nextBtn.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderGalleryPage(currentPage);
+      }
+    };
+    paginationContainer.appendChild(nextBtn);
+  }
 }
 
 // Modal functions for gallery
