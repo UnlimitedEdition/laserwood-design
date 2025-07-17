@@ -124,7 +124,6 @@ if (gallery) {
     };
     paginationContainer.appendChild(lastBtn);
   }
-  }
 }
 
 // Modal functions for gallery
