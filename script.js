@@ -49,10 +49,24 @@ if (gallery) {
   function renderPagination(page) {
     if (!paginationContainer) return;
     paginationContainer.innerHTML = '';
-    // Prev button
+
+    // << button (first page)
+    const firstBtn = document.createElement('button');
+    firstBtn.textContent = '<<';
+    firstBtn.className = 'px-3 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
+    firstBtn.disabled = page === 1;
+    firstBtn.onclick = () => {
+      if (currentPage !== 1) {
+        currentPage = 1;
+        renderGalleryPage(currentPage);
+      }
+    };
+    paginationContainer.appendChild(firstBtn);
+
+    // < button (previous page)
     const prevBtn = document.createElement('button');
-    prevBtn.textContent = 'Prethodna';
-    prevBtn.className = 'px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
+    prevBtn.textContent = '<';
+    prevBtn.className = 'px-3 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
     prevBtn.disabled = page === 1;
     prevBtn.onclick = () => {
       if (currentPage > 1) {
@@ -62,8 +76,17 @@ if (gallery) {
     };
     paginationContainer.appendChild(prevBtn);
 
-    // Page numbers
-    for (let i = 1; i <= totalPages; i++) {
+    // Dynamic page numbers (show max 5, center on current)
+    let startPage = Math.max(1, page - 2);
+    let endPage = Math.min(totalPages, page + 2);
+    if (endPage - startPage < 4) {
+      if (startPage === 1) {
+        endPage = Math.min(totalPages, startPage + 4);
+      } else if (endPage === totalPages) {
+        startPage = Math.max(1, endPage - 4);
+      }
+    }
+    for (let i = startPage; i <= endPage; i++) {
       const pageBtn = document.createElement('button');
       pageBtn.textContent = i;
       pageBtn.className = 'px-3 py-2 rounded font-poppins ' + (i === page ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-green-500 hover:text-white');
@@ -75,10 +98,10 @@ if (gallery) {
       paginationContainer.appendChild(pageBtn);
     }
 
-    // Next button
+    // > button (next page)
     const nextBtn = document.createElement('button');
-    nextBtn.textContent = 'Sledeća';
-    nextBtn.className = 'px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
+    nextBtn.textContent = '>';
+    nextBtn.className = 'px-3 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
     nextBtn.disabled = page === totalPages;
     nextBtn.onclick = () => {
       if (currentPage < totalPages) {
@@ -87,6 +110,20 @@ if (gallery) {
       }
     };
     paginationContainer.appendChild(nextBtn);
+
+    // >> button (last page)
+    const lastBtn = document.createElement('button');
+    lastBtn.textContent = '>>';
+    lastBtn.className = 'px-3 py-2 rounded bg-gray-300 text-gray-700 hover:bg-green-600 hover:text-white font-poppins';
+    lastBtn.disabled = page === totalPages;
+    lastBtn.onclick = () => {
+      if (currentPage !== totalPages) {
+        currentPage = totalPages;
+        renderGalleryPage(currentPage);
+      }
+    };
+    paginationContainer.appendChild(lastBtn);
+  }
   }
 }
 
