@@ -65,12 +65,12 @@ nav {
 }
 
 #mobile-menu {
-  transition: transform 0.3s ease-in-out;
-  transform: translateY(-100%);
+  display: none;
+  /* Remove transform so only .hidden controls visibility */
 }
 
 #mobile-menu:not(.hidden) {
-  transform: translateY(0);
+  display: block;
 }
 
 #mobile-menu ul {
